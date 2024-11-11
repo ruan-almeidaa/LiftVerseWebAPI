@@ -13,7 +13,7 @@ namespace Infra.Database
         public BancoContext(DbContextOptions<BancoContext> options) : base(options)
         {
         }
-        public DbSet<Usuario> PerfisUsuarios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<CredenciaisUsuario> CredenciaisUsuarios { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Infra.Repositories
         {
 			try
 			{
-				return await _bancoContext.PerfisUsuarios
+				return await _bancoContext.Usuarios
 					.AsNoTracking()
 					.ToListAsync();
 

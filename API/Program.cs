@@ -23,8 +23,8 @@ builder.Services.AddDbContext<BancoContext>(options =>
     }));
 
 
-builder.Services.AddScoped<IPerfilUsuarioService, PerfilUsuarioService>();
-builder.Services.AddScoped<IPerfilUsuarioRepository, PerfilUsuarioRepository>();   
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();   
 
 var app = builder.Build();
 

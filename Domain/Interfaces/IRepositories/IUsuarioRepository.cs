@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities.Entities;
+using Shared.Response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IRepositories
 {
-    public interface IPerfilUsuarioRepository
+    public interface IUsuarioRepository
     {
+        Task<List<Usuario>> BuscarTodosUsuarios();
     }
 }

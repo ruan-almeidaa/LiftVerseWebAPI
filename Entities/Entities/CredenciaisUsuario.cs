@@ -11,6 +11,6 @@ namespace Entities.Entities
         public int Id { get; set; }
         public required string Email { get; set; }
         public required string Senha { get; set; }
-        public required PerfilUsuario PerfilUsuario { get; set; }
+        public required Usuario PerfilUsuario { get; set; }
     }
 }

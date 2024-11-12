@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.IServices;
+﻿using Domain.Dtos;
+using Domain.Interfaces.IServices;
 using Domain.Services;
 using Entities.Entities;
 using Microsoft.AspNetCore.Http;
@@ -22,14 +23,13 @@ namespace API.Controllers
         {
             try
             {
-                List<Usuario> usuarios = await _usuarioService.BuscarTodosUsuarios();
-                return usuarios.Any()
-                    ? Ok(ResponseService.CriarResponse(usuarios, "Ok", true))
-                    : NotFound(ResponseService.CriarResponse(usuarios, "Não foram encontrados usuários", false));
+                ResponseModel<List<Usuario>> response = await _usuarioService.BuscarTodosUsuarios();
+                return StatusCode((int)response.HttpStatusCode, response);
+
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", false));
+                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
     }

@@ -20,18 +20,23 @@ namespace Infra.Repositories
 		}
         public async Task<List<Usuario>> BuscarTodosUsuarios()
         {
-			try
-			{
-				return await _bancoContext.Usuarios
-					.AsNoTracking()
-					.ToListAsync();
+            return await _bancoContext.Usuarios
+                .AsNoTracking()
+                .ToListAsync();
 
-			}
-			catch (Exception)
-			{
+        }
 
-				throw;
-			}
+        public async Task<Usuario> CriarUsuario(Usuario usuario)
+        {
+            await _bancoContext.Usuarios.AddAsync(usuario);
+            await _bancoContext.SaveChangesAsync();
+            return usuario;
+        }
+
+        public async Task<bool> VerificaSeExisteNick(string nickname)
+        {
+            return await _bancoContext.Usuarios
+                .AnyAsync(u => u.Nickname == nickname);
         }
     }
 }

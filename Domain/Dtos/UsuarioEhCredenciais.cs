@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Entities
+namespace Domain.Dtos
 {
-    public class Usuario
+    public class UsuarioEhCredenciais
     {
-        public int Id { get; set; }
         public required string Nickname { get; set; }
         public required string Nome { get; set; }
         public required string Sobrenome { get; set; }
         public string? Foto { get; set; }
+        public required string Email { get; set; }
+        public required string Senha { get; set; }
     }
 }

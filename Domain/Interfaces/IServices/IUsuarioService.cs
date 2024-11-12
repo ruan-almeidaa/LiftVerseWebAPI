@@ -10,10 +10,6 @@ namespace Domain.Interfaces.IServices
 {
     public interface IUsuarioService
     {
-        Task<List<Usuario>> BuscarTodosUsuarios();
-        Task<Usuario> BuscarUsuario(int idUsuario);
-        Task<Usuario> EditarUsuario(Usuario perfilUsuario);
-        Task<Usuario> ExcluirUsuario(Usuario perfilUsuario);
-        Task<Usuario> CriarUsuario(Usuario perfilUsuario);
+        Task<ResponseModel<List<Usuario>>> BuscarTodosUsuarios();
     }
 }

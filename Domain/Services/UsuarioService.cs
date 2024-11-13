@@ -31,6 +31,14 @@ namespace Domain.Services
             return await _usuarioRepository.CriarUsuario(usuario);
         }
 
+        public async Task<ResponseModel<Usuario>> EditarUsuario(Usuario usuario)
+        {
+            Usuario usuarioEditado = await _usuarioRepository.EditarUsuario(usuario);
+            return usuarioEditado != null
+                ? ResponseService.CriarResponse(usuarioEditado, "Usuário editado com sucesso!", HttpStatusCode.OK)
+                : ResponseService.CriarResponse(usuarioEditado, "Houve um erro ao editar o usuário!", HttpStatusCode.BadRequest);
+        }
+
         public async Task<bool> VerificaSeExisteNick(string nickname)
         {
             return await _usuarioRepository.VerificaSeExisteNick(nickname);

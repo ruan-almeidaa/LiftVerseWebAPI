@@ -49,5 +49,21 @@ namespace API.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<ActionResult<ResponseModel<Usuario>>> EditarUsuario(Usuario usuario)
+        {
+            try
+            {
+                ResponseModel<Usuario> response = await _usuarioService.EditarUsuario(usuario);
+                return StatusCode((int)response.HttpStatusCode, response);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+
+        }
+
     }
 }

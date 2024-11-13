@@ -50,7 +50,8 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CredenciaisUsuarios_UsuarioId",
                 table: "CredenciaisUsuarios",
-                column: "UsuarioId");
+                column: "UsuarioId",
+                unique: true);
         }
 
         /// <inheritdoc />

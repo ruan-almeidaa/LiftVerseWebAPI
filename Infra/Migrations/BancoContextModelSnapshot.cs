@@ -42,7 +42,8 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("CredenciaisUsuarios");
                 });
@@ -78,12 +79,17 @@ namespace Infra.Migrations
             modelBuilder.Entity("Entities.Entities.CredenciaisUsuario", b =>
                 {
                     b.HasOne("Entities.Entities.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
+                        .WithOne("Credenciais")
+                        .HasForeignKey("Entities.Entities.CredenciaisUsuario", "UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Entities.Entities.Usuario", b =>
+                {
+                    b.Navigation("Credenciais");
                 });
 #pragma warning restore 612, 618
         }

@@ -46,6 +46,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 //Fluent validation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<UsuarioEhCredenciaisDtoValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidation>();
 
 //Entity Framework
 builder.Services.AddDbContext<BancoContext>(options =>

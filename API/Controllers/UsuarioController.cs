@@ -65,5 +65,20 @@ namespace API.Controllers
 
         }
 
+        [HttpDelete]
+        public async Task<ActionResult<ResponseModel<Usuario>>> ExcluirUsuario(Usuario usuario)
+        {
+            try
+            {
+                ResponseModel<Usuario> response = await _usuarioService.ExcluirUsuario(usuario);
+                return StatusCode((int)response.HttpStatusCode, response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+
+        }
+
     }
 }

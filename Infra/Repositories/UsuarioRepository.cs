@@ -41,6 +41,14 @@ namespace Infra.Repositories
             return usuario;
         }
 
+        public async Task<bool> ExcluirUsuario(Usuario usuario)
+        {
+            _bancoContext.Usuarios.Remove(usuario);
+            int qtdRegistrosExcluidos = await _bancoContext.SaveChangesAsync();
+            return qtdRegistrosExcluidos > 0;
+
+        }
+
         public async Task<bool> VerificaSeExisteNick(string nickname)
         {
             return await _bancoContext.Usuarios

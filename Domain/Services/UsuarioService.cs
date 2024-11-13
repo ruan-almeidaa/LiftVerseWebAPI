@@ -39,6 +39,14 @@ namespace Domain.Services
                 : ResponseService.CriarResponse(usuarioEditado, "Houve um erro ao editar o usuário!", HttpStatusCode.BadRequest);
         }
 
+        public async Task<ResponseModel<Usuario>> ExcluirUsuario(Usuario usuario)
+        {
+            bool usuarioExcluido = await _usuarioRepository.ExcluirUsuario(usuario);
+            return usuarioExcluido
+                ? ResponseService.CriarResponse(usuario, "Usuário excluído com sucesso!", HttpStatusCode.OK)
+                : ResponseService.CriarResponse(usuario, "Houve um erro ao excluir o usuário!", HttpStatusCode.BadRequest);
+        }
+
         public async Task<bool> VerificaSeExisteNick(string nickname)
         {
             return await _usuarioRepository.VerificaSeExisteNick(nickname);

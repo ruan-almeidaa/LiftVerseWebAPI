@@ -14,5 +14,6 @@ namespace Domain.Interfaces.IServices
         Task<bool> VerificaSeExisteNick(string nickname);
         Task<Usuario> CriarUsuario(Usuario usuario);
         Task<ResponseModel<Usuario>> EditarUsuario(Usuario usuario);
+        Task<ResponseModel<Usuario>> ExcluirUsuario(Usuario usuario);
     }
 }

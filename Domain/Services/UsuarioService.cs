@@ -25,5 +25,15 @@ namespace Domain.Services
                 ? ResponseService.CriarResponse(usuarios, "Lista de usuários encontrada com sucesso!", HttpStatusCode.OK)
                 : ResponseService.CriarResponse(usuarios, "Não foram encontrados usuários!", HttpStatusCode.NotFound);
         }
+
+        public async Task<Usuario> CriarUsuario(Usuario usuario)
+        {
+            return await _usuarioRepository.CriarUsuario(usuario);
+        }
+
+        public async Task<bool> VerificaSeExisteNick(string nickname)
+        {
+            return await _usuarioRepository.VerificaSeExisteNick(nickname);
+        }
     }
 }

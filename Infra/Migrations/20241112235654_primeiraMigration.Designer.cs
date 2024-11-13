@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20241111230400_inicial")]
-    partial class inicial
+    [Migration("20241112235654_primeiraMigration")]
+    partial class primeiraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,16 +36,16 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PerfilUsuarioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfilUsuarioId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("CredenciaisUsuarios");
                 });
@@ -59,7 +59,6 @@ namespace Infra.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Foto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nickname")
@@ -81,13 +80,13 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Entities.Entities.CredenciaisUsuario", b =>
                 {
-                    b.HasOne("Entities.Entities.Usuario", "PerfilUsuario")
+                    b.HasOne("Entities.Entities.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("PerfilUsuarioId")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PerfilUsuario");
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

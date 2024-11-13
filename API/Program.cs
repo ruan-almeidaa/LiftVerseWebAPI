@@ -1,6 +1,7 @@
 using Domain.Interfaces.IRepositories;
 using Domain.Interfaces.IServices;
 using Domain.Services;
+using Helpers.Automapper;
 using Infra.Database;
 using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Adiciona AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 //Entity Framework
 builder.Services.AddDbContext<BancoContext>(options =>
@@ -24,7 +28,10 @@ builder.Services.AddDbContext<BancoContext>(options =>
 
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();   
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICredenciaisUsuarioService, CredenciaisUsuarioService>();
+builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
+builder.Services.AddScoped<IOrquestracaoService, OrquestracaoService>();
 
 var app = builder.Build();
 

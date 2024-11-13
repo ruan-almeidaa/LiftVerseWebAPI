@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.IRepositories;
 using Entities.Entities;
 using Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,13 @@ namespace Infra.Repositories
             await _bancoContext.CredenciaisUsuarios.AddAsync(credenciaisUsuario);
             await _bancoContext.SaveChangesAsync();
             return credenciaisUsuario;
+        }
+
+        public async Task<bool> VerificaSeExisteEmail(string email)
+        {
+            return await _bancoContext.CredenciaisUsuarios
+                .AsNoTracking()
+                .AnyAsync(c => c.Email == email);
         }
     }
 }

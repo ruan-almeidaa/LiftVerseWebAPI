@@ -36,6 +36,7 @@ namespace Infra.Repositories
         public async Task<bool> VerificaSeExisteNick(string nickname)
         {
             return await _bancoContext.Usuarios
+                .AsNoTracking()
                 .AnyAsync(u => u.Nickname == nickname);
         }
     }

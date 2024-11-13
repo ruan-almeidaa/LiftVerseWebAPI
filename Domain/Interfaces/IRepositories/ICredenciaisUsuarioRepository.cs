@@ -10,5 +10,6 @@ namespace Domain.Interfaces.IRepositories
     public interface ICredenciaisUsuarioRepository
     {
         Task<CredenciaisUsuario> CriarCredenciais(CredenciaisUsuario credenciaisUsuario);
+        Task<bool> VerificaSeExisteEmail(string email);
     }
 }

@@ -5,7 +5,7 @@
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class primeiraMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace Infra.Migrations
                     Nickname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Foto = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Foto = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,23 +34,23 @@ namespace Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PerfilUsuarioId = table.Column<int>(type: "int", nullable: false)
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CredenciaisUsuarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CredenciaisUsuarios_Usuarios_PerfilUsuarioId",
-                        column: x => x.PerfilUsuarioId,
+                        name: "FK_CredenciaisUsuarios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CredenciaisUsuarios_PerfilUsuarioId",
+                name: "IX_CredenciaisUsuarios_UsuarioId",
                 table: "CredenciaisUsuarios",
-                column: "PerfilUsuarioId");
+                column: "UsuarioId");
         }
 
         /// <inheritdoc />

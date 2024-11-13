@@ -11,5 +11,7 @@ namespace Domain.Interfaces.IServices
     public interface IUsuarioService
     {
         Task<ResponseModel<List<Usuario>>> BuscarTodosUsuarios();
+        Task<bool> VerificaSeExisteNick(string nickname);
+        Task<Usuario> CriarUsuario(Usuario usuario);
     }
 }

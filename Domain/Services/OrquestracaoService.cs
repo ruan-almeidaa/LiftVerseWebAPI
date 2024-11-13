@@ -2,6 +2,7 @@
 using Domain.Interfaces.IServices;
 using Entities.Dtos;
 using Entities.Entities;
+using Shared.Criptografia;
 using Shared.Response;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Domain.Services
             CredenciaisUsuario credenciaisUsuario = new()
             {
                 Email = usuarioEhCredenciais.Email,
-                Senha = usuarioEhCredenciais.Senha,
+                Senha = Criptografia.GerarHash(usuarioEhCredenciais.Senha),
                 UsuarioId = usuarioCriado.Id,
                 Usuario = usuarioCriado
             };

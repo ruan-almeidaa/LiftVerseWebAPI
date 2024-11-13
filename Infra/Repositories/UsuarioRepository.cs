@@ -33,6 +33,11 @@ namespace Infra.Repositories
             return usuario;
         }
 
+        public Task<Usuario> EditarUsuario(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> VerificaSeExisteNick(string nickname)
         {
             return await _bancoContext.Usuarios

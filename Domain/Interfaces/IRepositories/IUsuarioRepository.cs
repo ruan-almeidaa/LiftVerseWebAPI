@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IRepositories
         Task<List<Usuario>> BuscarTodosUsuarios();
         Task<Usuario> CriarUsuario(Usuario usuario);
         Task<bool> VerificaSeExisteNick(string nickname);
+        Task<Usuario> EditarUsuario(Usuario usuario);
     }
 }

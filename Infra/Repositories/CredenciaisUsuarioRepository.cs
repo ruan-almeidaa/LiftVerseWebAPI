@@ -22,6 +22,8 @@ namespace Infra.Repositories
         {
             return await _bancoContext.CredenciaisUsuarios
                 .Where(c => c.Email == email && c.Senha == senha)
+                .Include(c => c.Usuario)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 

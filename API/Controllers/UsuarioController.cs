@@ -2,6 +2,7 @@
 using Domain.Services;
 using Entities.Dtos;
 using Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
@@ -21,6 +22,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseModel<List<Usuario>>>> BuscarTodosUsuarios()
         {
             try
@@ -50,6 +52,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<ResponseModel<Usuario>>> EditarUsuario(Usuario usuario)
         {
             try
@@ -66,6 +69,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<ActionResult<ResponseModel<Usuario>>> ExcluirUsuario(Usuario usuario)
         {
             try

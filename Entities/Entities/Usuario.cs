@@ -13,5 +13,6 @@ namespace Entities.Entities
         public required string Nome { get; set; }
         public required string Sobrenome { get; set; }
         public string? Foto { get; set; }
+        public bool Administrador { get; set; }
     }
 }

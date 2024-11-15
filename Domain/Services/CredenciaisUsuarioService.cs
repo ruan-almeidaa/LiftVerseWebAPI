@@ -59,8 +59,12 @@ namespace Domain.Services
 
             var claims = new[]
             {
-                new Claim("nome", credenciaisUsuario.Email),
-                new Claim("id",   credenciaisUsuario.UsuarioId.ToString())
+                new Claim("id",   credenciaisUsuario.UsuarioId.ToString()),
+                new Claim("Nome", credenciaisUsuario.Email),
+                new Claim("Sobrenome", credenciaisUsuario.Usuario.Sobrenome),
+                new Claim("Foto", credenciaisUsuario.Usuario.Foto),
+                new Claim("Email", credenciaisUsuario.Email),
+                new Claim(ClaimTypes.Role, credenciaisUsuario.Usuario.Administrador ? "Admin" : "User")
             };
 
 

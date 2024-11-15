@@ -36,7 +36,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ResponseModel<Usuario>>> CriarUsuario(UsuarioEhCredenciais usuarioEhCredenciais)
+        public async Task<ActionResult<ResponseModel<Usuario>>> CriarUsuario(UsuarioEhCredenciaisDto usuarioEhCredenciais)
         {
             try
             {
@@ -78,6 +78,20 @@ namespace API.Controllers
                 return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
 
+        }
+
+        [HttpPost("Autenticar")]
+        public async Task<ActionResult<ResponseModel<string>>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
+        {
+            try
+            {
+                ResponseModel<string> response = await _orquestracaoService.AutenticarUsuario(credenciaisUsuarioDto);
+                return StatusCode((int)response.HttpStatusCode, response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
         }
 
     }

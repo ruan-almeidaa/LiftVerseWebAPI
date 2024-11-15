@@ -1,4 +1,6 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos;
+using Entities.Entities;
+using Shared.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +13,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<bool> VerificaSeExisteEmail(string email);
         Task<CredenciaisUsuario> CriarCredenciaisUsuario(CredenciaisUsuario credenciaisUsuario);
+        Task<string>AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
     }
 }

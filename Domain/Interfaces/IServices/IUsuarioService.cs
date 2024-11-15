@@ -15,5 +15,6 @@ namespace Domain.Interfaces.IServices
         Task<Usuario> CriarUsuario(Usuario usuario);
         Task<ResponseModel<Usuario>> EditarUsuario(Usuario usuario);
         Task<ResponseModel<Usuario>> ExcluirUsuario(Usuario usuario);
+        Task<Usuario> BuscarUsuarioPorId(int id);
     }
 }

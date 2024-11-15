@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Helpers.Validation
 {
-    public class UsuarioEhCredenciaisDtoValidation : AbstractValidator<UsuarioEhCredenciais>
+    public class UsuarioEhCredenciaisDtoValidation : AbstractValidator<UsuarioEhCredenciaisDto>
     {
         public UsuarioEhCredenciaisDtoValidation()
         {

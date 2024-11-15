@@ -11,5 +11,6 @@ namespace Domain.Interfaces.IRepositories
     {
         Task<CredenciaisUsuario> CriarCredenciais(CredenciaisUsuario credenciaisUsuario);
         Task<bool> VerificaSeExisteEmail(string email);
+        Task<CredenciaisUsuario> BuscaCredenciaisPorEmailSenha(string email, string senha);
     }
 }

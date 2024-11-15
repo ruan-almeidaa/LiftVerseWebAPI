@@ -24,7 +24,21 @@ namespace Domain.Services
             _mapper = mapper;
             _credenciaisUsuarioService = credenciaisUsuarioService;
         }
-        public async Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciais usuarioEhCredenciais)
+
+        public async Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
+        {
+            try
+            {
+                string token = await _credenciaisUsuarioService.AutenticarUsuario(credenciaisUsuarioDto);
+                return ResponseService.CriarResponse(token, "Usuário autenticado!",HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return ResponseService.CriarResponse(ex.Message, "Usuário não autenticado!", HttpStatusCode.Unauthorized);
+            }
+        }
+
+        public async Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais)
         {
             Usuario usuarioAhSerCriado = _mapper.Map<Usuario>(usuarioEhCredenciais);
 

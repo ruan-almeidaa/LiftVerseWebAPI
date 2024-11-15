@@ -17,6 +17,19 @@ namespace Infra.Repositories
         {
             _bancoContext = bancoContext;
         }
+
+        public async Task<CredenciaisUsuario> BuscaCredenciaisPorEmailSenha(string email, string senha)
+        {
+            return await _bancoContext.CredenciaisUsuarios
+                .Where(c => c.Email == email && c.Senha == senha)
+                .FirstOrDefaultAsync();
+        }
+
+        public Task<int> BuscaUsuarioPorEmailSenha(string email, string senha)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<CredenciaisUsuario> CriarCredenciais(CredenciaisUsuario credenciaisUsuario)
         {
             await _bancoContext.CredenciaisUsuarios.AddAsync(credenciaisUsuario);

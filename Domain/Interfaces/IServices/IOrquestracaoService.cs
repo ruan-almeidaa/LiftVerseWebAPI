@@ -11,6 +11,7 @@ namespace Domain.Interfaces.IServices
 {
     public interface IOrquestracaoService
     {
-        Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciais usuarioEhCredenciais);
+        Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
+        Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
     }
 }

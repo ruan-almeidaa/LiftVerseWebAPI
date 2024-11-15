@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dtos
 {
-    public class UsuarioEhCredenciais
+    public class UsuarioEhCredenciaisDto
     {
         public required string Nickname { get; set; }
         public required string Nome { get; set; }

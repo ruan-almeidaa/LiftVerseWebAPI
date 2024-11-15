@@ -26,6 +26,11 @@ namespace Domain.Services
                 : ResponseService.CriarResponse(usuarios, "Não foram encontrados usuários!", HttpStatusCode.NotFound);
         }
 
+        public Task<Usuario> BuscarUsuarioPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Usuario> CriarUsuario(Usuario usuario)
         {
             return await _usuarioRepository.CriarUsuario(usuario);

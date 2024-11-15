@@ -13,7 +13,7 @@ namespace Helpers.Automapper
     {
         public MappingProfile()
         {
-            CreateMap<UsuarioEhCredenciais, Usuario>();
+            CreateMap<UsuarioEhCredenciaisDto, Usuario>();
         }
     }
 }

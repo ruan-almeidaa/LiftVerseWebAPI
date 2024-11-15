@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -57,13 +58,17 @@ namespace API.Controllers
         {
             try
             {
+                int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
+                string direitoUsuarioToken = User.FindFirst(ClaimTypes.Role)?.Value;
+                if(idUsuarioToken != usuario.Id && direitoUsuarioToken != "Admin") return StatusCode(500, ResponseService.CriarResponse<Usuario>(usuario, "Acesso negado", System.Net.HttpStatusCode.Forbidden));
+
                 ResponseModel<Usuario> response = await _usuarioService.EditarUsuario(usuario);
                 return StatusCode((int)response.HttpStatusCode, response);
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ResponseService.CriarResponse<List<Usuario>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+                return StatusCode(500, ResponseService.CriarResponse<Usuario>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
 
         }
@@ -74,6 +79,10 @@ namespace API.Controllers
         {
             try
             {
+                int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
+                string direitoUsuarioToken = User.FindFirst(ClaimTypes.Role)?.Value;
+                if (idUsuarioToken != usuario.Id && direitoUsuarioToken != "Admin") return StatusCode(500, ResponseService.CriarResponse<Usuario>(usuario, "Acesso negado", System.Net.HttpStatusCode.Forbidden));
+
                 ResponseModel<Usuario> response = await _usuarioService.ExcluirUsuario(usuario);
                 return StatusCode((int)response.HttpStatusCode, response);
             }

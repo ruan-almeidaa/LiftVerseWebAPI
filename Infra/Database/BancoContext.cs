@@ -16,6 +16,8 @@ namespace Infra.Database
         public DbSet<GrupoMuscular> GruposMusculares { get; set; }
         public DbSet<Exercicio> Exercicios { get; set; }
         public DbSet<VariacaoExercicio> VariacoesExercicios { get; set; }
+        public DbSet<Treino> Treinos { get; set; }
+        public DbSet<ExercicioFeito> ExerciciosFeitos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +40,17 @@ namespace Infra.Database
                 .WithMany() // GrupoMuscular pode ter muitos Exercicios
                 .HasForeignKey(e => e.GrupoMuscularId) // Chave estrangeira em Exercicio
                 .OnDelete(DeleteBehavior.Restrict); // Exclusão restrita para preservar integridade referencial
+
+            // Relacionamento entre Treino e ExercicioFeito: Um Treino pode ter vários ExercicioFeito
+            modelBuilder.Entity<Treino>()
+                .HasMany(t => t.ExerciciosFeitos) // Treino tem muitos ExercicioFeito
+                .WithOne() // Cada ExercicioFeito pertence a um Treino
+                .HasForeignKey(ef => ef.TreinoId) // Defina a chave estrangeira no ExercicioFeito
+                .OnDelete(DeleteBehavior.Cascade); // Definindo o comportamento de exclusão (pode ser ajustado conforme necessário)
+
+            // Definir a chave primária de ExercicioFeito
+            modelBuilder.Entity<ExercicioFeito>()
+                .HasKey(ef => ef.Id);
 
         }
     }

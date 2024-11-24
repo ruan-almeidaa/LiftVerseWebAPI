@@ -10,7 +10,7 @@ namespace Entities.Entities
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
-        public required string Titulos { get; set; }
+        public required string Titulo { get; set; }
         public required DateOnly Data { get; set; }
         public List<ExercicioFeito>? ExerciciosFeitos { get; set;}
     }

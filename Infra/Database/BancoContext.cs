@@ -52,6 +52,13 @@ namespace Infra.Database
             modelBuilder.Entity<ExercicioFeito>()
                 .HasKey(ef => ef.Id);
 
+            // Configurar relacionamento 1-N entre VariacaoExercicio e ExercicioFeito
+            modelBuilder.Entity<ExercicioFeito>()
+                .HasOne(ef => ef.VariacaoExercicio) // Um ExercicioFeito tem uma VariacaoExercicio
+                .WithMany() // Uma VariacaoExercicio tem vários ExercicioFeito
+                .HasForeignKey(ef => ef.VariacaoExercicioId) // Chave estrangeira em ExercicioFeito
+                .OnDelete(DeleteBehavior.Restrict); // Comportamento de exclusão
+
         }
     }
 }

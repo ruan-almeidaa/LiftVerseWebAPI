@@ -67,6 +67,10 @@ builder.Services.AddScoped<ICredenciaisUsuarioService, CredenciaisUsuarioService
 builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
 builder.Services.AddScoped<IOrquestracaoService, OrquestracaoService>();
 builder.Services.AddScoped<IVariaveisService, VariaveisService>();
+builder.Services.AddScoped<ITreinoService, TreinoService>();
+builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
+builder.Services.AddScoped<IExercicioFeitoService, ExercicioFeitoService>();
+builder.Services.AddScoped<IExercicioFeitoRepository,  ExercicioFeitoRepository>();
 builder.Services.Configure<Variaveis>(builder.Configuration.GetSection("AppSettings"));
 
 string chaveToken = builder.Configuration["AppSettings:ChaveToken"];

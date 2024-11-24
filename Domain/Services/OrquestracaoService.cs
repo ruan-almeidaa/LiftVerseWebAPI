@@ -18,11 +18,15 @@ namespace Domain.Services
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
         private readonly ICredenciaisUsuarioService _credenciaisUsuarioService;
-        public OrquestracaoService(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService)
+        private readonly ITreinoService _treinoService;
+        private readonly IExercicioFeitoService _exercicioFeitoService;
+        public OrquestracaoService(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService, ITreinoService treinoService, IExercicioFeitoService exercicioFeitoService)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
             _credenciaisUsuarioService = credenciaisUsuarioService;
+            _treinoService = treinoService;
+            _exercicioFeitoService = exercicioFeitoService;
         }
 
         public async Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
@@ -36,6 +40,14 @@ namespace Domain.Services
             {
                 return ResponseService.CriarResponse(ex.Message, "Usuário não autenticado!", HttpStatusCode.Unauthorized);
             }
+        }
+
+        public async Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoDto treinoDto)
+        {
+            Treino treinoAhSerCriado = _mapper.Map<Treino>(treinoDto);
+            Treino treinoCriado = await _treinoService.CriarTreino(treinoAhSerCriado);
+
+            return ResponseService.CriarResponse(treinoCriado, "Treino criado com sucesso!", HttpStatusCode.Created);
         }
 
         public async Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais)

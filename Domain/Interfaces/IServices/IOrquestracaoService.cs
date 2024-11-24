@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
         Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
+        Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoDto treinoDto);
     }
 }

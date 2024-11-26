@@ -1,4 +1,4 @@
-﻿using Entities.Dtos;
+﻿using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Entities;
 using Shared.Response;
 using System;

@@ -22,5 +22,13 @@ namespace Infra.Repositories
             await _bancoContext.SaveChangesAsync();
             return treino;
         }
+
+        public async Task<Treino> EditarTreino(Treino treino)
+        {
+            _bancoContext.ChangeTracker.Clear();
+            _bancoContext.Treinos.Update(treino);
+            await _bancoContext.SaveChangesAsync();
+            return treino;
+        }
     }
 }

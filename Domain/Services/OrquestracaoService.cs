@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Interfaces.IServices;
-using Entities.Dtos;
+using Entities.Dtos.Input.CredenciaisUsuario;
+using Entities.Dtos.Input.Treino;
+using Entities.Dtos.Input.Usuario;
 using Entities.Entities;
 using Shared.Criptografia;
 using Shared.Response;
@@ -42,7 +44,7 @@ namespace Domain.Services
             }
         }
 
-        public async Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoDto treinoDto)
+        public async Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto)
         {
             Treino treinoAhSerCriado = _mapper.Map<Treino>(treinoDto);
             Treino treinoCriado = await _treinoService.CriarTreino(treinoAhSerCriado);

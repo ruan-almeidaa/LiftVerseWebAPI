@@ -1,6 +1,6 @@
 ﻿using Domain.Interfaces.IRepositories;
 using Domain.Interfaces.IServices;
-using Entities.Dtos;
+using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Criptografia;

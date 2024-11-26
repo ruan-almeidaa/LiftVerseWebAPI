@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using Entities.Dtos;
+using Entities.Dtos.Input.ExercicioFeito;
+using Entities.Dtos.Input.Treino;
+using Entities.Dtos.Input.Usuario;
 using Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace Helpers.Automapper
         public MappingProfile()
         {
             CreateMap<UsuarioEhCredenciaisDto, Usuario>();
-            CreateMap<TreinoDto, Treino>();
+            CreateMap<TreinoCriarDto, Treino>();
             CreateMap<ExercicioFeitoDto, ExercicioFeito>();
         }
     }

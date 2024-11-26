@@ -1,13 +1,14 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Input.ExercicioFeito;
+using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Dtos
+namespace Entities.Dtos.Input.Treino
 {
-    public class TreinoDto
+    public class TreinoCriarDto
     {
         public int UsuarioId { get; set; }
         public required string Titulo { get; set; }

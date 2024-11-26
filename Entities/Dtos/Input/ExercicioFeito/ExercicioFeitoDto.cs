@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Dtos
+namespace Entities.Dtos.Input.ExercicioFeito
 {
     public class ExercicioFeitoDto
     {

@@ -10,5 +10,6 @@ namespace Domain.Interfaces.IRepositories
     public interface ITreinoRepository
     {
         Task<Treino> CriarTreino(Treino treino);
+        Task<Treino> EditarTreino(Treino treino);
     }
 }

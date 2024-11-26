@@ -1,4 +1,6 @@
-﻿using Entities.Dtos;
+﻿using Entities.Dtos.Input.CredenciaisUsuario;
+using Entities.Dtos.Input.Treino;
+using Entities.Dtos.Input.Usuario;
 using Entities.Entities;
 using Shared.Response;
 using System;
@@ -13,6 +15,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
         Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
-        Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoDto treinoDto);
+        Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto);
     }
 }

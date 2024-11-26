@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.IServices;
 using Domain.Services;
-using Entities.Dtos;
+using Entities.Dtos.Input.CredenciaisUsuario;
+using Entities.Dtos.Input.Usuario;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

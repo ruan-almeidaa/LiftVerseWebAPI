@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ResponseModel<Treino>>> EditarTreino(TreinoCriarDto treinoDto)
+        public async Task<ActionResult<ResponseModel<Treino>>> EditarTreino(TreinoEditarDto treinoDto)
         {
             try
             {

@@ -13,6 +13,6 @@ namespace Entities.Dtos.Input.Treino
         public int UsuarioId { get; set; }
         public required string Titulo { get; set; }
         public required DateOnly Data { get; set; }
-        public List<ExercicioFeitoDto>? ExerciciosFeitos { get; set; }
+        public List<ExercicioFeitoCriarDto>? ExerciciosFeitos { get; set; }
     }
 }

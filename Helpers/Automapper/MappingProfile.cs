@@ -16,8 +16,12 @@ namespace Helpers.Automapper
         public MappingProfile()
         {
             CreateMap<UsuarioEhCredenciaisDto, Usuario>();
+
+            CreateMap<ExercicioFeitoCriarDto, ExercicioFeito>();
+            CreateMap<ExercicioFeitoEditarDto, ExercicioFeito>();
+
             CreateMap<TreinoCriarDto, Treino>();
-            CreateMap<ExercicioFeitoDto, ExercicioFeito>();
+            CreateMap<TreinoEditarDto, Treino>();
         }
     }
 }

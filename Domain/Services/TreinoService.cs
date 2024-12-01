@@ -28,7 +28,7 @@ namespace Domain.Services
             return await _treinoRepository.CriarTreino(treino);
         }
 
-        public async Task<ResponseModel<Treino>> EditarTreino(TreinoCriarDto treinoDto)
+        public async Task<ResponseModel<Treino>> EditarTreino(TreinoEditarDto treinoDto)
         {
             Treino treinoEditado = _mapper.Map<Treino>(treinoDto);
             treinoEditado = await _treinoRepository.EditarTreino(treinoEditado);

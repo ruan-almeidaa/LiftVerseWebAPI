@@ -12,6 +12,6 @@ namespace Domain.Interfaces.IServices
     public interface ITreinoService
     {
         Task<Treino> CriarTreino(Treino treino);
-        Task<ResponseModel<Treino>> EditarTreino(TreinoCriarDto treinoDto);
+        Task<ResponseModel<Treino>> EditarTreino(TreinoEditarDto treinoDto);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dtos.Input.ExercicioFeito
 {
-    public class ExercicioFeitoDto
+    public class ExercicioFeitoCriarDto
     {
         public int TreinoId { get; set; }
         public int ExercicioId { get; set; }

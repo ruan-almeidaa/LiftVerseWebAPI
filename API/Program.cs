@@ -60,17 +60,20 @@ builder.Services.AddDbContext<BancoContext>(options =>
         sqlServerOptions.EnableRetryOnFailure(1); // Tenta novamente 1 vez em caso de falha
     }));
 
-
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICredenciaisUsuarioService, CredenciaisUsuarioService>();
-builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
-builder.Services.AddScoped<IOrquestracaoService, OrquestracaoService>();
 builder.Services.AddScoped<IVariaveisService, VariaveisService>();
 builder.Services.AddScoped<ITreinoService, TreinoService>();
-builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
 builder.Services.AddScoped<IExercicioFeitoService, ExercicioFeitoService>();
+
+builder.Services.AddScoped<IOrquestraTreinoExercicioService, OrquestraTreinoExercicioService>();
+builder.Services.AddScoped<IOrquestraUsuarioCredenciaisService, OrquestraUsuarioCredenciaisService>();
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
+builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
 builder.Services.AddScoped<IExercicioFeitoRepository,  ExercicioFeitoRepository>();
+
 builder.Services.Configure<Variaveis>(builder.Configuration.GetSection("AppSettings"));
 
 string chaveToken = builder.Configuration["AppSettings:ChaveToken"];

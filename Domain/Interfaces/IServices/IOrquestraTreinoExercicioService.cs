@@ -11,10 +11,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IServices
 {
-    public interface IOrquestracaoService
+    public interface IOrquestraTreinoExercicioService
     {
-        Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
-        Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
         Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto);
     }
 }

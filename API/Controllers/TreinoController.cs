@@ -13,9 +13,9 @@ namespace API.Controllers
     [Authorize]
     public class TreinoController : ControllerBase
     {
-        private readonly IOrquestracaoService _orquestracaoService;
+        private readonly IOrquestraTreinoExercicioService _orquestracaoService;
         private readonly ITreinoService _treinoService;
-        public TreinoController(IOrquestracaoService orquestracaoService, ITreinoService treinoService) 
+        public TreinoController(IOrquestraTreinoExercicioService orquestracaoService, ITreinoService treinoService) 
         { 
             _orquestracaoService = orquestracaoService; 
             _treinoService = treinoService;

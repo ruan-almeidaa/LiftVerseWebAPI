@@ -16,11 +16,11 @@ namespace API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly IOrquestracaoService _orquestracaoService;
-        public UsuarioController(IUsuarioService usuarioService, IOrquestracaoService orquestracaoService)
+        private readonly IOrquestraUsuarioCredenciaisService _orquestracaoUsuarioCredenciaisService;
+        public UsuarioController(IUsuarioService usuarioService, IOrquestraUsuarioCredenciaisService orquestracaoUsuarioCredenciaisService)
         {
             _usuarioService = usuarioService;
-            _orquestracaoService = orquestracaoService;
+            _orquestracaoUsuarioCredenciaisService = orquestracaoUsuarioCredenciaisService;
         }
 
         [HttpGet]
@@ -44,7 +44,7 @@ namespace API.Controllers
         {
             try
             {
-                ResponseModel<Usuario> response = await _orquestracaoService.CriaUsuarioEhCredenciais(usuarioEhCredenciais);
+                ResponseModel<Usuario> response = await _orquestracaoUsuarioCredenciaisService.CriaUsuarioEhCredenciais(usuarioEhCredenciais);
                 return StatusCode((int)response.HttpStatusCode, response);
             }
             catch (Exception ex)
@@ -99,7 +99,7 @@ namespace API.Controllers
         {
             try
             {
-                ResponseModel<string> response = await _orquestracaoService.AutenticarUsuario(credenciaisUsuarioDto);
+                ResponseModel<string> response = await _orquestracaoUsuarioCredenciaisService.AutenticarUsuario(credenciaisUsuarioDto);
                 return StatusCode((int)response.HttpStatusCode, response);
             }
             catch (Exception ex)

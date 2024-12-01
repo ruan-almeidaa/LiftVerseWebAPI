@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Interfaces.IServices;
 using Entities.Dtos.Input.CredenciaisUsuario;
-using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
 using Entities.Entities;
 using Shared.Criptografia;
@@ -15,20 +14,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public class OrquestracaoService : IOrquestracaoService
+    public class OrquestraUsuarioCredenciaisService : IOrquestraUsuarioCredenciaisService
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
         private readonly ICredenciaisUsuarioService _credenciaisUsuarioService;
-        private readonly ITreinoService _treinoService;
-        private readonly IExercicioFeitoService _exercicioFeitoService;
-        public OrquestracaoService(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService, ITreinoService treinoService, IExercicioFeitoService exercicioFeitoService)
+
+        public OrquestraUsuarioCredenciaisService(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
             _credenciaisUsuarioService = credenciaisUsuarioService;
-            _treinoService = treinoService;
-            _exercicioFeitoService = exercicioFeitoService;
         }
 
         public async Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
@@ -36,20 +32,12 @@ namespace Domain.Services
             try
             {
                 string token = await _credenciaisUsuarioService.AutenticarUsuario(credenciaisUsuarioDto);
-                return ResponseService.CriarResponse(token, "Usuário autenticado!",HttpStatusCode.OK);
+                return ResponseService.CriarResponse(token, "Usuário autenticado!", HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
                 return ResponseService.CriarResponse(ex.Message, "Usuário não autenticado!", HttpStatusCode.Unauthorized);
             }
-        }
-
-        public async Task<ResponseModel<Treino>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto)
-        {
-            Treino treinoAhSerCriado = _mapper.Map<Treino>(treinoDto);
-            Treino treinoCriado = await _treinoService.CriarTreino(treinoAhSerCriado);
-
-            return ResponseService.CriarResponse(treinoCriado, "Treino criado com sucesso!", HttpStatusCode.Created);
         }
 
         public async Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais)
@@ -75,7 +63,6 @@ namespace Domain.Services
             await _credenciaisUsuarioService.CriarCredenciaisUsuario(credenciaisUsuario);
 
             return ResponseService.CriarResponse(usuarioAhSerCriado, "Usuário criado com sucesso", HttpStatusCode.Created);
-
         }
     }
 }

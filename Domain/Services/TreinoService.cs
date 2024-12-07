@@ -28,13 +28,9 @@ namespace Domain.Services
             return await _treinoRepository.CriarTreino(treino);
         }
 
-        public async Task<ResponseModel<Treino>> EditarTreino(TreinoEditarDto treinoDto)
+        public async Task<Treino> EditarTreino(TreinoEditarDto treinoDto)
         {
-            Treino treinoEditado = _mapper.Map<Treino>(treinoDto);
-            treinoEditado = await _treinoRepository.EditarTreino(treinoEditado);
-            return treinoEditado != null
-                ? ResponseService.CriarResponse(treinoEditado, "treino editado com sucesso!", HttpStatusCode.OK)
-                : ResponseService.CriarResponse(treinoEditado, "Houve um erro ao editar o treino!", HttpStatusCode.BadRequest);
+            return await _treinoRepository.EditarTreino(_mapper.Map<Treino>(treinoDto));
         }
     }
 }

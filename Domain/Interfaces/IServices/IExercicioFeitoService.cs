@@ -12,5 +12,7 @@ namespace Domain.Interfaces.IServices
     {
         Task<ExercicioFeito> CriarExercicio(ExercicioFeito exercicioFeito);
         Task<ExercicioFeitoDetalhadoDto> ConverteExercicioFeitoParaDetalhado(ExercicioFeito exercicioFeito);
+        Task ExcluirExerciciosTreino(int treinoId);
+        Task<List<ExercicioFeito>> CriarListaExerciciosFeitos(List<ExercicioFeito> exercicios);
     }
 }

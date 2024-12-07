@@ -36,15 +36,15 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ResponseModel<Treino>>> EditarTreino(TreinoEditarDto treinoDto)
+        public async Task<ActionResult<ResponseModel<TreinoDetalhadoDto>>> EditarTreino(TreinoEditarDto treinoDto)
         {
             try
             {
-                return await _treinoService.EditarTreino(treinoDto);
+                return await _orquestracaoService.EditarTreino(treinoDto);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ResponseService.CriarResponse<Treino>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+                return StatusCode(500, ResponseService.CriarResponse<TreinoDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
     }

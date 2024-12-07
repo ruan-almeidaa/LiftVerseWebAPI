@@ -13,13 +13,13 @@ namespace Domain.Services
 {
     public class ExercicioFeitoService : IExercicioFeitoService
     {
-        private readonly IExercicioFeitoRepository _exercicioRepository;
+        private readonly IExercicioFeitoRepository _exercicioFeitoRepository;
         private readonly IMapper _mapper;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
         public ExercicioFeitoService(IExercicioFeitoRepository exercicioFeitoRepository, IMapper mapper, IExercicioService exercicioService, IVariacaoExercicioService variacaoExercicioService)
         {
-            _exercicioRepository = exercicioFeitoRepository;
+            _exercicioFeitoRepository = exercicioFeitoRepository;
             _mapper = mapper;
             _exercicioService = exercicioService;
             _variacaoExercicioService = variacaoExercicioService;
@@ -39,7 +39,23 @@ namespace Domain.Services
 
         public async Task<ExercicioFeito> CriarExercicio(ExercicioFeito exercicioFeito)
         {
-            return await _exercicioRepository.CriarExercicio(exercicioFeito);
+            return await _exercicioFeitoRepository.CriarExercicio(exercicioFeito);
+        }
+
+        public async Task<List<ExercicioFeito>> CriarListaExerciciosFeitos(List<ExercicioFeito> exercicios)
+        {
+            List<ExercicioFeito> exerciciosCriados = new List<ExercicioFeito>();
+            foreach(ExercicioFeito exercicioFeito in exercicios)
+            {
+                exerciciosCriados.Add(await CriarExercicio(exercicioFeito));
+            }
+
+            return exerciciosCriados;
+        }
+
+        public async Task ExcluirExerciciosTreino(int treinoId)
+        {
+            await _exercicioFeitoRepository.ExcluirExerciciosTreino(treinoId);
         }
     }
 }

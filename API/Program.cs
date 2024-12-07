@@ -65,6 +65,8 @@ builder.Services.AddScoped<ICredenciaisUsuarioService, CredenciaisUsuarioService
 builder.Services.AddScoped<IVariaveisService, VariaveisService>();
 builder.Services.AddScoped<ITreinoService, TreinoService>();
 builder.Services.AddScoped<IExercicioFeitoService, ExercicioFeitoService>();
+builder.Services.AddScoped<IExercicioService, ExercicioService>();
+builder.Services.AddScoped<IVariacaoExercicioService, VariacaoExercicioService>();
 
 builder.Services.AddScoped<IOrquestraTreinoExercicioService, OrquestraTreinoExercicioService>();
 builder.Services.AddScoped<IOrquestraUsuarioCredenciaisService, OrquestraUsuarioCredenciaisService>();
@@ -73,6 +75,8 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
 builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
 builder.Services.AddScoped<IExercicioFeitoRepository,  ExercicioFeitoRepository>();
+builder.Services.AddScoped<IExercicioRepository, ExercicioRepository>();
+builder.Services.AddScoped<IVariacaoExercicioRepository, VariacaoExercicioRepository>();
 
 builder.Services.Configure<Variaveis>(builder.Configuration.GetSection("AppSettings"));
 

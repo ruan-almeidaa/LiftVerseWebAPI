@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.IServices;
 using Entities.Dtos.Input.Treino;
+using Entities.Dtos.Output.Treino;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +22,7 @@ namespace API.Controllers
             _treinoService = treinoService;
         }
         [HttpPost]
-        public async Task<ActionResult<ResponseModel<Treino>>> CriarTreino(TreinoCriarDto treinoDto)
+        public async Task<ActionResult<ResponseModel<TreinoDetalhadoDto>>> CriarTreino(TreinoCriarDto treinoDto)
         {
             try
             {

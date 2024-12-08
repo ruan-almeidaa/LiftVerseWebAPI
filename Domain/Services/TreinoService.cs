@@ -42,5 +42,10 @@ namespace Domain.Services
         {
             return await _treinoRepository.EditarTreino(_mapper.Map<Treino>(treinoDto));
         }
+
+        public async Task<bool> ExcluirTreino(Treino treino)
+        {
+            return await _treinoRepository.ExcluirTreino(treino);
+        }
     }
 }

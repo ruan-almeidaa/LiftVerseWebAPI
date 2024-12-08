@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IRepositories
         Task<Treino> EditarTreino(Treino treino);
         Task<List<Treino>> BuscarTreinosUsuario(int usuarioId);
         Task<Treino> BuscarTreinoPorId(int treinoId);
+        Task<bool> ExcluirTreino(Treino treino);
     }
 }

@@ -92,6 +92,19 @@ namespace Domain.Services
                 : ResponseService.CriarResponse(treinoDetalhadoDto, "Houve um erro ao editar o treino!", HttpStatusCode.BadRequest);
         }
 
+        public async Task<ResponseModel<Treino>> ExcluirTreino(int usuarioId, int treinoId)
+        {
+            Treino treinoAhSerExcluido = await _treinoService.BuscarTreinoPorId(treinoId);
+            if (treinoAhSerExcluido == null) return ResponseService.CriarResponse<Treino>(null, "O treino não foi encontrado!", HttpStatusCode.NotFound);
+            if (treinoAhSerExcluido.UsuarioId != usuarioId) return ResponseService.CriarResponse<Treino>(null, "O usuário não pode acessar esse treino!", HttpStatusCode.Unauthorized);
+
+            bool treinoFoiExcluido = await _treinoService.ExcluirTreino(treinoAhSerExcluido);
+
+            return treinoFoiExcluido
+                ? ResponseService.CriarResponse(treinoAhSerExcluido, "treino excluido com sucesso!", HttpStatusCode.OK)
+                : ResponseService.CriarResponse(treinoAhSerExcluido, "Houve um erro ao excluir o treino!", HttpStatusCode.BadRequest);
+        }
+
         private async Task<TreinoDetalhadoDto> ConverteTreinoParaTreinoDetalhado(Treino treino)
         {
             TreinoDetalhadoDto treinoAhSerRetornado = _mapper.Map<TreinoDetalhadoDto>(treino);

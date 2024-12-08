@@ -15,5 +15,6 @@ namespace Domain.Interfaces.IServices
         Task<Treino> EditarTreino(TreinoEditarDto treinoDto);
         Task<List<Treino>> BuscarTreinosUsuario(int usuarioId);
         Task<Treino> BuscarTreinoPorId(int treinoId);
+        Task<bool> ExcluirTreino(Treino treino);
     }
 }

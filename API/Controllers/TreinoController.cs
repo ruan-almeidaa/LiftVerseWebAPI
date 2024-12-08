@@ -48,7 +48,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("BuscarTreino")]
+        [HttpGet]
         public async Task<ActionResult<ResponseModel<List<TreinoDetalhadoDto>>>> BuscarTreinosUsuario()
         {
             try
@@ -62,7 +62,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("BuscarTreino/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ResponseModel<TreinoDetalhadoDto>>> BuscarTreino([FromRoute] int id)
         {
             try
@@ -73,6 +73,20 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ResponseService.CriarResponse<List<TreinoDetalhadoDto>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResponseModel<Treino>>> ExcluirTreino([FromRoute] int id)
+        {
+            try
+            {
+                int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
+                return await _orquestracaoService.ExcluirTreino(idUsuarioToken, id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<Treino>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
     }

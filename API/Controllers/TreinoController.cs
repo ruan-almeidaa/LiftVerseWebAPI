@@ -15,11 +15,9 @@ namespace API.Controllers
     public class TreinoController : ControllerBase
     {
         private readonly IOrquestraTreinoExercicioService _orquestracaoService;
-        private readonly ITreinoService _treinoService;
-        public TreinoController(IOrquestraTreinoExercicioService orquestracaoService, ITreinoService treinoService) 
+        public TreinoController(IOrquestraTreinoExercicioService orquestracaoService) 
         { 
             _orquestracaoService = orquestracaoService; 
-            _treinoService = treinoService;
         }
         [HttpPost]
         public async Task<ActionResult<ResponseModel<TreinoDetalhadoDto>>> CriarTreino(TreinoCriarDto treinoDto)

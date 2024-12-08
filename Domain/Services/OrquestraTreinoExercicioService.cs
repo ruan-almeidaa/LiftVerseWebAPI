@@ -33,6 +33,21 @@ namespace Domain.Services
             _variacaoExercicioService = variacaoExercicioService;
         }
 
+        public async Task<ResponseModel<List<TreinoDetalhadoDto>>> BuscarTreinosUsuario(int usuarioId)
+        {
+            List<Treino> treinos = await _treinoService.BuscarTreinosUsuario(usuarioId);
+
+            List<TreinoDetalhadoDto> treinosDetalhados = new List<TreinoDetalhadoDto>();
+            foreach(Treino treino in treinos)
+            {
+                treinosDetalhados.Add(await ConverteTreinoParaTreinoDetalhado(treino));
+            }
+
+            return treinosDetalhados.Any()
+                ? ResponseService.CriarResponse(treinosDetalhados, "Lista de treinos do usuário encontrada com sucesso!", HttpStatusCode.OK)
+                : ResponseService.CriarResponse(treinosDetalhados, "Não foram encontrados treinos do usuário", HttpStatusCode.NotFound);
+        }
+
         public async Task<ResponseModel<TreinoDetalhadoDto>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto)
         {
             Treino treinoCriado = await _treinoService.CriarTreino(_mapper.Map<Treino>(treinoDto));

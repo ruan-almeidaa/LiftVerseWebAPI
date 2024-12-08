@@ -16,5 +16,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<ResponseModel<TreinoDetalhadoDto>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto);
         Task<ResponseModel<TreinoDetalhadoDto>> EditarTreino(TreinoEditarDto treinoEditadoDto);
+        Task<ResponseModel<List<TreinoDetalhadoDto>>> BuscarTreinosUsuario(int usuarioId);
     }
 }

@@ -47,5 +47,19 @@ namespace API.Controllers
                 return StatusCode(500, ResponseService.CriarResponse<TreinoDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
+
+        [HttpGet("BuscarTreinos")]
+        public async Task<ActionResult<ResponseModel<List<TreinoDetalhadoDto>>>> BuscarTreinosUsuario()
+        {
+            try
+            {
+                int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
+                return await _orquestracaoService.BuscarTreinosUsuario(idUsuarioToken);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<List<TreinoDetalhadoDto>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
     }
 }

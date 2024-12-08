@@ -11,5 +11,6 @@ namespace Domain.Interfaces.IRepositories
     {
         Task<Treino> CriarTreino(Treino treino);
         Task<Treino> EditarTreino(Treino treino);
+        Task<List<Treino>> BuscarTreinosUsuario(int usuarioId);
     }
 }

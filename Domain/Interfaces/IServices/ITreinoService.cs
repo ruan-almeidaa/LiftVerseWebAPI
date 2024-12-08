@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<Treino> CriarTreino(Treino treino);
         Task<Treino> EditarTreino(TreinoEditarDto treinoDto);
+        Task<List<Treino>> BuscarTreinosUsuario(int usuarioId);
     }
 }

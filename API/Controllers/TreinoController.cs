@@ -48,13 +48,27 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("BuscarTreinos")]
+        [HttpGet("BuscarTreino")]
         public async Task<ActionResult<ResponseModel<List<TreinoDetalhadoDto>>>> BuscarTreinosUsuario()
         {
             try
             {
                 int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
                 return await _orquestracaoService.BuscarTreinosUsuario(idUsuarioToken);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<List<TreinoDetalhadoDto>>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
+
+        [HttpGet("BuscarTreino/{id}")]
+        public async Task<ActionResult<ResponseModel<TreinoDetalhadoDto>>> BuscarTreino([FromRoute] int id)
+        {
+            try
+            {
+                int idUsuarioToken = int.Parse(User.FindFirst("id")?.Value);
+                return await _orquestracaoService.BuscarTreinoPorId(idUsuarioToken, id);
             }
             catch (Exception ex)
             {

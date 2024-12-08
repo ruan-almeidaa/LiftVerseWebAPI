@@ -18,6 +18,14 @@ namespace Infra.Repositories
             _bancoContext = bancoContext;
         }
 
+        public async Task<Treino> BuscarTreinoPorId(int treinoId)
+        {
+            return await _bancoContext.Treinos
+                .Include(t => t.ExerciciosFeitos)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(t => t.Id == treinoId);
+        }
+
         public async Task<List<Treino>> BuscarTreinosUsuario(int usuarioId)
         {
             return await _bancoContext.Treinos

@@ -23,6 +23,11 @@ namespace Domain.Services
             _mapper = mapper;
         }
 
+        public async Task<Treino> BuscarTreinoPorId(int treinoId)
+        {
+            return await _treinoRepository.BuscarTreinoPorId(treinoId);
+        }
+
         public async Task<List<Treino>> BuscarTreinosUsuario(int usuarioId)
         {
             return await _treinoRepository.BuscarTreinosUsuario(usuarioId);

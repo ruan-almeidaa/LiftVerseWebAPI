@@ -33,6 +33,17 @@ namespace Domain.Services
             _variacaoExercicioService = variacaoExercicioService;
         }
 
+        public async Task<ResponseModel<TreinoDetalhadoDto>> BuscarTreinoPorId(int usuarioId, int treinoId)
+        {
+            Treino treinoBuscado = await _treinoService.BuscarTreinoPorId(treinoId);
+            if(treinoBuscado == null) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O treino não foi encontrado!", HttpStatusCode.NotFound);
+            if(treinoBuscado.UsuarioId !=  usuarioId) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O usuário não pode acessar esse treino!", HttpStatusCode.Unauthorized);
+
+
+            TreinoDetalhadoDto treinoDetalhadoDto = await ConverteTreinoParaTreinoDetalhado(treinoBuscado);
+            return ResponseService.CriarResponse<TreinoDetalhadoDto>(treinoDetalhadoDto,"Treino encontrado com sucesso!", HttpStatusCode.OK);
+        }
+
         public async Task<ResponseModel<List<TreinoDetalhadoDto>>> BuscarTreinosUsuario(int usuarioId)
         {
             List<Treino> treinos = await _treinoService.BuscarTreinosUsuario(usuarioId);

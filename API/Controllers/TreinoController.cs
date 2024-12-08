@@ -26,6 +26,7 @@ namespace API.Controllers
         {
             try
             {
+                if(int.Parse(User.FindFirst("id")?.Value) != treinoDto.UsuarioId) return StatusCode(500, ResponseService.CriarResponse<TreinoCriarDto>(treinoDto, "Acesso negado", System.Net.HttpStatusCode.Forbidden));
                 return await _orquestracaoService.CriarTreinoEhExerciciosFeitos(treinoDto);
             }
             catch (Exception ex)
@@ -40,6 +41,7 @@ namespace API.Controllers
         {
             try
             {
+                if (int.Parse(User.FindFirst("id")?.Value) != treinoDto.UsuarioId) return StatusCode(500, ResponseService.CriarResponse<TreinoEditarDto>(treinoDto, "Acesso negado", System.Net.HttpStatusCode.Forbidden));
                 return await _orquestracaoService.EditarTreino(treinoDto);
             }
             catch (Exception ex)

@@ -2,6 +2,7 @@
 using Domain.Services;
 using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Dtos.Input.Usuario;
+using Entities.Dtos.Output.Usuario;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -95,11 +96,11 @@ namespace API.Controllers
         }
 
         [HttpPost("Autenticar")]
-        public async Task<ActionResult<ResponseModel<string>>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
+        public async Task<ActionResult<ResponseModel<UsuarioAutenticadoDto>>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
         {
             try
             {
-                ResponseModel<string> response = await _orquestracaoUsuarioCredenciaisService.AutenticarUsuario(credenciaisUsuarioDto);
+                ResponseModel<UsuarioAutenticadoDto> response = await _orquestracaoUsuarioCredenciaisService.AutenticarUsuario(credenciaisUsuarioDto);
                 return StatusCode((int)response.HttpStatusCode, response);
             }
             catch (Exception ex)

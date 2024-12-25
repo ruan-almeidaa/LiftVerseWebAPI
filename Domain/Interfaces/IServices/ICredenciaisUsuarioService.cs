@@ -1,4 +1,5 @@
 ﻿using Entities.Dtos.Input.CredenciaisUsuario;
+using Entities.Dtos.Output.Usuario;
 using Entities.Entities;
 using Shared.Response;
 using System;
@@ -13,6 +14,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<bool> VerificaSeExisteEmail(string email);
         Task<CredenciaisUsuario> CriarCredenciaisUsuario(CredenciaisUsuario credenciaisUsuario);
-        Task<string>AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
+        Task<UsuarioAutenticadoDto>AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
     }
 }

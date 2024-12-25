@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.IRepositories;
 using Domain.Interfaces.IServices;
 using Entities.Dtos.Input.CredenciaisUsuario;
+using Entities.Dtos.Output.Usuario;
 using Entities.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Criptografia;
@@ -26,15 +27,27 @@ namespace Domain.Services
             _variaveisService = variaveisService;
         }
 
-        public async Task<string> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
+        public async Task<UsuarioAutenticadoDto> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
         {
             credenciaisUsuarioDto.Senha = Criptografia.GerarHash(credenciaisUsuarioDto.Senha);
             CredenciaisUsuario credenciaisUsuarioParaAutenticar = await _credenciaisUsuarioRepository.BuscaCredenciaisPorEmailSenha(credenciaisUsuarioDto.Email, credenciaisUsuarioDto.Senha);
 
             if (credenciaisUsuarioParaAutenticar == null) throw new InvalidOperationException("Email ou senha enválidos!");
 
-            return await GerarToken(credenciaisUsuarioParaAutenticar);
+            string token = await GerarToken(credenciaisUsuarioParaAutenticar);
 
+            UsuarioAutenticadoDto usuarioAutenticadoDto = new()
+            {
+                Id = credenciaisUsuarioParaAutenticar.Usuario.Id,
+                Nickname = credenciaisUsuarioParaAutenticar.Usuario.Nickname,
+                Nome = credenciaisUsuarioParaAutenticar.Usuario.Nome,
+                Sobrenome = credenciaisUsuarioParaAutenticar.Usuario.Sobrenome,
+                Foto = credenciaisUsuarioParaAutenticar.Usuario.Foto,
+                Email = credenciaisUsuarioParaAutenticar.Email,
+                Administrador = credenciaisUsuarioParaAutenticar.Usuario.Administrador,
+                Token = token
+            };
+            return usuarioAutenticadoDto;
         }
 
         public async Task<CredenciaisUsuario> CriarCredenciaisUsuario(CredenciaisUsuario credenciaisUsuario)

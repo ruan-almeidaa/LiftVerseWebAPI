@@ -2,6 +2,7 @@
 using Domain.Interfaces.IServices;
 using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Dtos.Input.Usuario;
+using Entities.Dtos.Output.Usuario;
 using Entities.Entities;
 using Shared.Criptografia;
 using Shared.Response;
@@ -27,16 +28,16 @@ namespace Domain.Services
             _credenciaisUsuarioService = credenciaisUsuarioService;
         }
 
-        public async Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
+        public async Task<ResponseModel<UsuarioAutenticadoDto>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto)
         {
             try
             {
-                string token = await _credenciaisUsuarioService.AutenticarUsuario(credenciaisUsuarioDto);
-                return ResponseService.CriarResponse(token, "Usuário autenticado!", HttpStatusCode.OK);
+                UsuarioAutenticadoDto usuarioAutenticadoDto = await _credenciaisUsuarioService.AutenticarUsuario(credenciaisUsuarioDto);
+                return ResponseService.CriarResponse<UsuarioAutenticadoDto>(usuarioAutenticadoDto, "Usuário autenticado!", HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                return ResponseService.CriarResponse(ex.Message, "Usuário não autenticado!", HttpStatusCode.Unauthorized);
+                return ResponseService.CriarResponse<UsuarioAutenticadoDto>(null, "Usuário não autenticado!", HttpStatusCode.Unauthorized);
             }
         }
 

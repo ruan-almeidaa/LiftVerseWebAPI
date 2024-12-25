@@ -1,5 +1,6 @@
 ﻿using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Dtos.Input.Usuario;
+using Entities.Dtos.Output.Usuario;
 using Entities.Entities;
 using Shared.Response;
 using System;
@@ -13,6 +14,6 @@ namespace Domain.Interfaces.IServices
     public interface IOrquestraUsuarioCredenciaisService
     {
         Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
-        Task<ResponseModel<string>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
+        Task<ResponseModel<UsuarioAutenticadoDto>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);
     }
 }

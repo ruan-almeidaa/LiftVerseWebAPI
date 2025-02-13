@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces.IRepositories;
 using Entities.Entities;
 using Infra.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace Infra.Repositories
 
         public async Task<Exercicio> BuscarPorid(int idExercicio)
         {
-            return await _bancoContext.Exercicios.FindAsync(idExercicio);
+            return await _bancoContext.Exercicios
+                .Include(e => e.Variacoes)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == idExercicio);
         }
     }
 }

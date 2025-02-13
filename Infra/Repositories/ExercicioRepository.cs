@@ -23,6 +23,7 @@ namespace Infra.Repositories
         {
             return await _bancoContext.Exercicios
                 .Include(e => e.Variacoes)
+                .Include(e => e.GrupoMuscular)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == idExercicio);
         }

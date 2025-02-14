@@ -27,5 +27,12 @@ namespace Infra.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == idExercicio);
         }
+
+        public async Task<Exercicio> CriarExercicio(Exercicio exercicio)
+        {
+            await _bancoContext.Exercicios.AddAsync(exercicio);
+            await _bancoContext.SaveChangesAsync();
+            return exercicio;
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Domain.Interfaces.IRepositories
     public interface IExercicioRepository
     {
         Task<Exercicio> BuscarPorid(int idExercicio);
+        Task<Exercicio> CriarExercicio(Exercicio exercicio);
     }
 }

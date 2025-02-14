@@ -22,5 +22,10 @@ namespace Domain.Services
         {
             return await _exercicioRepository.BuscarPorid(idExercicio);
         }
+
+        public async Task<Exercicio> CriarExercicio(Exercicio exercicio)
+        {
+            return await _exercicioRepository.CriarExercicio(exercicio);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Domain.Interfaces.IServices
     public interface IExercicioService
     {
         Task<Exercicio> BuscarPorid(int idExercicio);
+        Task<Exercicio> CriarExercicio(Exercicio exercicio);
     }
 }

@@ -70,6 +70,7 @@ builder.Services.AddScoped<IVariacaoExercicioService, VariacaoExercicioService>(
 
 builder.Services.AddScoped<IOrquestraTreinoExercicioService, OrquestraTreinoExercicioService>();
 builder.Services.AddScoped<IOrquestraUsuarioCredenciaisService, OrquestraUsuarioCredenciaisService>();
+builder.Services.AddScoped<IOrquestracaoExercicioVariacaoGrupo, OrquestracaoExercicioVariacaoGrupoService>();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();

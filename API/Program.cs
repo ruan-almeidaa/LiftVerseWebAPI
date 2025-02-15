@@ -78,6 +78,7 @@ builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
 builder.Services.AddScoped<IExercicioFeitoRepository,  ExercicioFeitoRepository>();
 builder.Services.AddScoped<IExercicioRepository, ExercicioRepository>();
 builder.Services.AddScoped<IVariacaoExercicioRepository, VariacaoExercicioRepository>();
+builder.Services.AddScoped<IGrupoMuscularRepository, GrupoMuscularRepository>();
 
 builder.Services.Configure<Variaveis>(builder.Configuration.GetSection("AppSettings"));
 

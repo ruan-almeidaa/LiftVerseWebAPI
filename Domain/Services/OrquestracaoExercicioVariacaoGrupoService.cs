@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces.IServices;
+﻿using AutoMapper;
+using Domain.Interfaces.IServices;
+using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.VariacaoExercicio;
 using Entities.Entities;
@@ -13,22 +15,33 @@ namespace Domain.Services
 {
     public class OrquestracaoExercicioVariacaoGrupoService : IOrquestracaoExercicioVariacaoGrupo
     {
+        private readonly IMapper _mapper;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
-        public OrquestracaoExercicioVariacaoGrupoService(IExercicioService exercicioService, IVariacaoExercicioService variacaoExercicioService)
+        private readonly IGrupoMuscularService _grupoMuscularService;
+        public OrquestracaoExercicioVariacaoGrupoService(IExercicioService exercicioService, IVariacaoExercicioService variacaoExercicioService, IMapper mapper, IGrupoMuscularService grupoMuscularService)
         {
             _exercicioService = exercicioService;
-            _variacaoExercicioService= variacaoExercicioService;
+            _variacaoExercicioService = variacaoExercicioService;
+            _mapper = mapper;
+            _grupoMuscularService = grupoMuscularService;
         }
         public async Task<ResponseModel<ExercicioDetalhadoDto>> BuscarPorId(int id)
         {
             Exercicio exercicio = await _exercicioService.BuscarPorid(id);
             ExercicioDetalhadoDto exercicioDetalhadoDto = _exercicioService.ConverteEmDetalhado(exercicio);
-            //VariacaoExercicioSimplificadoDto variacoesSimplificadas = await _variacaoExercicioService.ConverteListaEmDetalhado(exercicio.Variacoes);
-
-
 
             return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+        }
+
+        public async Task<ResponseModel<ExercicioDetalhadoDto>> CriarExercicio(ExercicioCriarDto exercicioCriarDto)
+        {
+            Exercicio exercicioCriado = await _exercicioService.CriarExercicio(_mapper.Map<Exercicio>(exercicioCriarDto));
+
+            ExercicioDetalhadoDto exercicioDetalhadoDto = _mapper.Map<ExercicioDetalhadoDto>(exercicioCriado);
+            exercicioDetalhadoDto.GrupoMuscular = await _grupoMuscularService.BuscarPorId(exercicioCriado.GrupoMuscularId);
+            return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+
         }
     }
 }

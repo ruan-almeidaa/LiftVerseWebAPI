@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.IServices;
+using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.Treino;
 using Entities.Entities;
@@ -32,22 +33,21 @@ namespace API.Controllers
                 return StatusCode(500, ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
-        /*
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ResponseModel<Exercicio>>> CriarExercicio(Exercicio exercicio)
+        public async Task<ActionResult<ResponseModel<ExercicioDetalhadoDto>>> CriarExercicio(ExercicioCriarDto exercicio)
         {
             try
             {
-
+                return await _orquestracaoExercicioVariacaoGrupo.CriarExercicio(exercicio);
             }
             catch (Exception ex)
             {
 
-                return StatusCode(500, ResponseService.CriarResponse<Exercicio>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+                return StatusCode(500, ResponseService.CriarResponse<ExercicioCriarDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
-        */
 
     }
 }

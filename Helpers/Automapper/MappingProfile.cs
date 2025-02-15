@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Input.ExercicioFeito;
 using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
@@ -31,6 +32,8 @@ namespace Helpers.Automapper
             CreateMap<Treino, TreinoDetalhadoDto>();
 
             CreateMap<Exercicio, ExercicioDetalhadoDto>();
+
+            CreateMap<ExercicioCriarDto, Exercicio>();
 
             CreateMap<VariacaoExercicio, VariacaoExercicioSimplificadoDto>();
         }

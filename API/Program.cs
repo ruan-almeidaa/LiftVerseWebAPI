@@ -67,6 +67,7 @@ builder.Services.AddScoped<ITreinoService, TreinoService>();
 builder.Services.AddScoped<IExercicioFeitoService, ExercicioFeitoService>();
 builder.Services.AddScoped<IExercicioService, ExercicioService>();
 builder.Services.AddScoped<IVariacaoExercicioService, VariacaoExercicioService>();
+builder.Services.AddScoped<IGrupoMuscularService,  GrupoMuscularService>();
 
 builder.Services.AddScoped<IOrquestraTreinoExercicioService, OrquestraTreinoExercicioService>();
 builder.Services.AddScoped<IOrquestraUsuarioCredenciaisService, OrquestraUsuarioCredenciaisService>();

@@ -1,4 +1,5 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Output.Exercicio;
+using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<Exercicio> BuscarPorid(int idExercicio);
         Task<Exercicio> CriarExercicio(Exercicio exercicio);
+        ExercicioDetalhadoDto ConverteEmDetalhado(Exercicio exercicio);
     }
 }

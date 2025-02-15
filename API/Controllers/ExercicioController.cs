@@ -1,6 +1,8 @@
 ﻿using Domain.Interfaces.IServices;
+using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.Treino;
 using Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
@@ -11,26 +13,41 @@ namespace API.Controllers
     [ApiController]
     public class ExercicioController : ControllerBase
     {
-        private readonly IExercicioService _exercicioService;
+        private readonly IOrquestracaoExercicioVariacaoGrupo _orquestracaoExercicioVariacaoGrupo;
 
-        public ExercicioController(IExercicioService exercicioService)
+        public ExercicioController(IOrquestracaoExercicioVariacaoGrupo orquestracaoExercicioVariacaoGrupo)
         {
-            _exercicioService = exercicioService;
+            _orquestracaoExercicioVariacaoGrupo = orquestracaoExercicioVariacaoGrupo;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ResponseModel<Exercicio>>> BuscarPorId([FromRoute] int id)
+        public async Task<ActionResult<ResponseModel<ExercicioDetalhadoDto>>> BuscarPorId([FromRoute] int id)
         {
             try
             {
-                Exercicio exercicio = await _exercicioService.BuscarPorid(id);
-                return ResponseService.CriarResponse<Exercicio>(exercicio,"Ok", System.Net.HttpStatusCode.OK);
+                return await _orquestracaoExercicioVariacaoGrupo.BuscarPorId(id);
             }
             catch (Exception ex)
             {
+                return StatusCode(500, ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
+        /*
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseModel<Exercicio>>> CriarExercicio(Exercicio exercicio)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
                 return StatusCode(500, ResponseService.CriarResponse<Exercicio>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
+        */
 
     }
 }

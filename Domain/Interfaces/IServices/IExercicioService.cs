@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IServices
         Task<Exercicio> BuscarPorid(int idExercicio);
         Task<Exercicio> CriarExercicio(Exercicio exercicio);
         ExercicioDetalhadoDto ConverteEmDetalhado(Exercicio exercicio);
+        Task<Exercicio> EditarExercicio(Exercicio exercicio);
     }
 }

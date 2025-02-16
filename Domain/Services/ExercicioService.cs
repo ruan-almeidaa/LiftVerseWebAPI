@@ -36,5 +36,10 @@ namespace Domain.Services
         {
             return await _exercicioRepository.CriarExercicio(exercicio);
         }
+
+        public async Task<Exercicio> EditarExercicio(Exercicio exercicio)
+        {
+            return await _exercicioRepository.EditarExercicio(exercicio);
+        }
     }
 }

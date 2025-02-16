@@ -43,5 +43,15 @@ namespace Domain.Services
             return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
 
         }
+
+        public async Task<ResponseModel<ExercicioDetalhadoDto>> EditarExercicio(ExercicioEditarDto exercicioEditarDto)
+        {
+            Exercicio exercicioEditado = await _exercicioService.EditarExercicio(_mapper.Map<Exercicio>(exercicioEditarDto));
+
+            ExercicioDetalhadoDto exercicioDetalhadoDto = _mapper.Map<ExercicioDetalhadoDto>(exercicioEditado);
+            exercicioDetalhadoDto.GrupoMuscular = await _grupoMuscularService.BuscarPorId(exercicioEditado.GrupoMuscularId);
+            return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+
+        }
     }
 }

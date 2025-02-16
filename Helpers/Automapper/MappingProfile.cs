@@ -35,6 +35,8 @@ namespace Helpers.Automapper
 
             CreateMap<ExercicioCriarDto, Exercicio>();
 
+            CreateMap<ExercicioEditarDto, Exercicio>();
+
             CreateMap<VariacaoExercicio, VariacaoExercicioSimplificadoDto>();
         }
     }

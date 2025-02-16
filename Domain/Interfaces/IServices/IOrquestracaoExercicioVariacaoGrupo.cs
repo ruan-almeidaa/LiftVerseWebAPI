@@ -13,5 +13,6 @@ namespace Domain.Interfaces.IServices
     {
         Task<ResponseModel<ExercicioDetalhadoDto>> BuscarPorId(int id);
         Task<ResponseModel<ExercicioDetalhadoDto>> CriarExercicio(ExercicioCriarDto exercicioCriarDto);
+        Task<ResponseModel<ExercicioDetalhadoDto>> EditarExercicio(ExercicioEditarDto exercicioEditarDto);
     }
 }

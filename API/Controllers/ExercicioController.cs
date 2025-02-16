@@ -48,6 +48,21 @@ namespace API.Controllers
                 return StatusCode(500, ResponseService.CriarResponse<ExercicioCriarDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
+        
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseModel<ExercicioDetalhadoDto>>> EditarExercicio(ExercicioEditarDto exercicio)
+        {
+            try
+            {
+                return await _orquestracaoExercicioVariacaoGrupo.EditarExercicio(exercicio);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, ResponseService.CriarResponse<ExercicioCriarDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
 
     }
 }

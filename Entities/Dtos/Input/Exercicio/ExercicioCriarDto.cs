@@ -13,7 +13,5 @@ namespace Entities.Dtos.Input.Exercicio
     {
         public int GrupoMuscularId { get; set; }
         public required string Titulo { get; set; }
-        [MaxLength(2048)]
-        public string? Gif { get; set; }
     }
 }

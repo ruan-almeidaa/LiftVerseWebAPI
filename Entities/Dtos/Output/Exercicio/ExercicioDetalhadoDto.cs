@@ -13,8 +13,6 @@ namespace Entities.Dtos.Output.Exercicio
     {
         public int Id { get; set; }
         public required string Titulo { get; set; }
-        [MaxLength(2048)]
-        public string? Gif { get; set; }
         public List<VariacaoExercicioSimplificadoDto>? Variacoes { get; set; }
         public GrupoMuscular? GrupoMuscular { get; set; }
 

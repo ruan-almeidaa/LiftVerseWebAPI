@@ -42,5 +42,12 @@ namespace Infra.Repositories
             await _bancoContext.SaveChangesAsync();
             return await BuscarPorid(exercicio.Id);
         }
+
+        public async Task<bool> ExcluirExercicio(Exercicio exercicio)
+        {
+            _bancoContext.Exercicios.Remove(exercicio);
+            int qtdRegistrosExcluidos = await _bancoContext.SaveChangesAsync();
+            return qtdRegistrosExcluidos > 0;
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace Domain.Interfaces.IServices
         Task<Exercicio> CriarExercicio(Exercicio exercicio);
         ExercicioDetalhadoDto ConverteEmDetalhado(Exercicio exercicio);
         Task<Exercicio> EditarExercicio(Exercicio exercicio);
+        Task<bool> ExcluirExercicio(Exercicio exercicio);
     }
 }

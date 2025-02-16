@@ -40,7 +40,7 @@ namespace Infra.Repositories
             _bancoContext.ChangeTracker.Clear();
             _bancoContext.Exercicios.Update(exercicio);
             await _bancoContext.SaveChangesAsync();
-            return exercicio;
+            return await BuscarPorid(exercicio.Id);
         }
     }
 }

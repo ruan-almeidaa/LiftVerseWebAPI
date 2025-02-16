@@ -46,7 +46,7 @@ namespace Infra.Migrations
                     b.HasIndex("UsuarioId")
                         .IsUnique();
 
-                    b.ToTable("CredenciaisUsuarios");
+                    b.ToTable("CredenciaisUsuarios", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.Exercicio", b =>
@@ -56,10 +56,6 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Gif")
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<int>("GrupoMuscularId")
                         .HasColumnType("int");
@@ -72,7 +68,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("GrupoMuscularId");
 
-                    b.ToTable("Exercicios");
+                    b.ToTable("Exercicios", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.ExercicioFeito", b =>
@@ -112,7 +108,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("VariacaoExercicioId");
 
-                    b.ToTable("ExerciciosFeitos");
+                    b.ToTable("ExerciciosFeitos", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.GrupoMuscular", b =>
@@ -129,7 +125,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GruposMusculares");
+                    b.ToTable("GruposMusculares", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.Treino", b =>
@@ -152,7 +148,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Treinos");
+                    b.ToTable("Treinos", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.Usuario", b =>
@@ -183,7 +179,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.VariacaoExercicio", b =>
@@ -205,7 +201,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ExercicioId");
 
-                    b.ToTable("VariacoesExercicios");
+                    b.ToTable("VariacoesExercicios", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entities.CredenciaisUsuario", b =>

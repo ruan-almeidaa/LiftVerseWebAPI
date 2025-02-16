@@ -64,5 +64,19 @@ namespace API.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseModel<ExercicioDetalhadoDto>>> ExcluirExercicio([FromRoute] int id)
+        {
+            try
+            {
+                return await _orquestracaoExercicioVariacaoGrupo.ExcluirExercicio(id);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
+
     }
 }

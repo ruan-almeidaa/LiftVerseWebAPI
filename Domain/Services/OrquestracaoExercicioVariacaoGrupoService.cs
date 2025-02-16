@@ -53,5 +53,17 @@ namespace Domain.Services
             return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
 
         }
+
+        public async Task<ResponseModel<ExercicioDetalhadoDto>> ExcluirExercicio(int id)
+        {
+            Exercicio exercicioParaExcluir = await _exercicioService.BuscarPorid(id);
+            if (exercicioParaExcluir == null) return ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, "O exercício não foi encontrado!", System.Net.HttpStatusCode.NotFound);
+            bool exercicioFoiExcluido = await _exercicioService.ExcluirExercicio(exercicioParaExcluir);
+
+            return exercicioFoiExcluido
+                ? ResponseService.CriarResponse<ExercicioDetalhadoDto>(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Exercício excluido com sucesso!", System.Net.HttpStatusCode.OK)
+                : ResponseService.CriarResponse<ExercicioDetalhadoDto>(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Houve um erro ao excluir o exercício!", System.Net.HttpStatusCode.BadRequest);
+
+        }
     }
 }

@@ -19,6 +19,18 @@ namespace Infra.Repositories
             _bancoContext = bancoContext;
         }
 
+        public async Task<List<Exercicio>> BuscarExercicios(int numeroPagina, int totalItens)
+        {
+            return await _bancoContext.Exercicios
+                .Include(e => e.Variacoes)
+                .Include(e => e.GrupoMuscular)
+                .AsNoTracking()
+                .OrderBy(e => e.Id)
+                .Skip((numeroPagina - 1) * totalItens) // Pula os registros das páginas anteriores
+                .Take(totalItens) // Pega apenas os registros da página atual
+                .ToListAsync();
+        }
+
         public async Task<Exercicio> BuscarPorid(int idExercicio)
         {
             return await _bancoContext.Exercicios

@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.IServices;
+using Domain.Services;
 using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.Treino;
@@ -6,6 +7,7 @@ using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Paginacao;
 using Shared.Response;
 
 namespace API.Controllers
@@ -77,6 +79,20 @@ namespace API.Controllers
                 return StatusCode(500, ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<ResponseModel<PaginacaoModel<ExercicioDetalhadoDto>>>> BuscarExercicios([FromQuery] int numeroPagina = 1, [FromQuery] int qtdRegistrosPorPagina = 20)
+        {
+            try
+            {
+                return await _orquestracaoExercicioVariacaoGrupo.BuscarExercicios(numeroPagina, qtdRegistrosPorPagina);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseService.CriarResponse<ExercicioDetalhadoDto>(null, $"Ocorreu um erro: {ex.Message}", System.Net.HttpStatusCode.InternalServerError));
+            }
+        }
+
 
     }
 }

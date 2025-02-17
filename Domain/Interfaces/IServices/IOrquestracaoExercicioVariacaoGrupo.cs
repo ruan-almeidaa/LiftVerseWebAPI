@@ -1,5 +1,6 @@
 ﻿using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Output.Exercicio;
+using Shared.Paginacao;
 using Shared.Response;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace Domain.Interfaces.IServices
         Task<ResponseModel<ExercicioDetalhadoDto>> CriarExercicio(ExercicioCriarDto exercicioCriarDto);
         Task<ResponseModel<ExercicioDetalhadoDto>> EditarExercicio(ExercicioEditarDto exercicioEditarDto);
         Task<ResponseModel<ExercicioDetalhadoDto>> ExcluirExercicio(int id);
+        Task<ResponseModel<PaginacaoModel<ExercicioDetalhadoDto>>> BuscarExercicios(int numeroPagina, int qtdRegistrosPorPagina);
     }
 }

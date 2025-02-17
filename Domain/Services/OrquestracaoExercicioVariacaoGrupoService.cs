@@ -4,6 +4,7 @@ using Entities.Dtos.Input.Exercicio;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.VariacaoExercicio;
 using Entities.Entities;
+using Shared.Paginacao;
 using Shared.Response;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,14 @@ namespace Domain.Services
             _mapper = mapper;
             _grupoMuscularService = grupoMuscularService;
         }
+
+        public async Task<ResponseModel<PaginacaoModel<ExercicioDetalhadoDto>>> BuscarExercicios(int numeroPagina, int qtdRegistrosPorPagina)
+        {
+            PaginacaoModel<ExercicioDetalhadoDto> paginacaoExercicios = await _exercicioService.BuscarExercicios(numeroPagina, qtdRegistrosPorPagina);
+
+            return ResponseService.CriarResponse<PaginacaoModel<ExercicioDetalhadoDto>>(paginacaoExercicios, "Ok", System.Net.HttpStatusCode.OK);
+        }
+
         public async Task<ResponseModel<ExercicioDetalhadoDto>> BuscarPorId(int id)
         {
             Exercicio exercicio = await _exercicioService.BuscarPorid(id);

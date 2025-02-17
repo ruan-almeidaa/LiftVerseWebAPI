@@ -3,6 +3,7 @@ using Domain.Interfaces.IRepositories;
 using Domain.Interfaces.IServices;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Entities;
+using Shared.Paginacao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,23 @@ namespace Domain.Services
             _mapper = mapper;
         }
 
+        public async Task<PaginacaoModel<ExercicioDetalhadoDto>> BuscarExercicios(int numeroPagina, int totalItens)
+        {
+            List<Exercicio> exercicios = await _exercicioRepository.BuscarExercicios(numeroPagina, totalItens);
+            List<ExercicioDetalhadoDto> exerciciosDetalhados = await ConverteListaEmDetalhado(exercicios);
+
+            int totalRegistros = await _exercicioRepository.ContarExercicios();
+
+            return new PaginacaoModel<ExercicioDetalhadoDto>
+            {
+                Itens = exerciciosDetalhados,
+                TotalItensParaExibir = totalRegistros,
+                NumeroPaginaAtual = numeroPagina,
+                TotalPaginasParaExibir = totalRegistros / totalItens
+            };
+
+        }
+
         public async Task<Exercicio> BuscarPorid(int idExercicio)
         {
             return await _exercicioRepository.BuscarPorid(idExercicio);
@@ -30,6 +48,16 @@ namespace Domain.Services
         public ExercicioDetalhadoDto ConverteEmDetalhado(Exercicio exercicio)
         {
             return _mapper.Map<ExercicioDetalhadoDto>(exercicio);
+        }
+
+        public Task<List<ExercicioDetalhadoDto>> ConverteListaEmDetalhado(List<Exercicio> exercicios)
+        {
+            List<ExercicioDetalhadoDto> exerciciosDetalhados = new List<ExercicioDetalhadoDto>();
+            foreach (Exercicio exercicio in exercicios)
+            {
+                exerciciosDetalhados.Add(ConverteEmDetalhado(exercicio));
+            }
+            return Task.FromResult(exerciciosDetalhados);
         }
 
         public async Task<Exercicio> CriarExercicio(Exercicio exercicio)

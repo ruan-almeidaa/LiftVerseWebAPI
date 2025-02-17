@@ -1,5 +1,6 @@
 ﻿using Entities.Dtos.Output.Exercicio;
 using Entities.Entities;
+using Shared.Paginacao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace Domain.Interfaces.IServices
         ExercicioDetalhadoDto ConverteEmDetalhado(Exercicio exercicio);
         Task<Exercicio> EditarExercicio(Exercicio exercicio);
         Task<bool> ExcluirExercicio(Exercicio exercicio);
+        Task<PaginacaoModel<ExercicioDetalhadoDto>> BuscarExercicios(int numeroPagina, int totalItens);
+        Task<List<ExercicioDetalhadoDto>> ConverteListaEmDetalhado(List<Exercicio> exercicios);
     }
 }

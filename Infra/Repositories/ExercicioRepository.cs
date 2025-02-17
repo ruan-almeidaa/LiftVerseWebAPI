@@ -40,6 +40,11 @@ namespace Infra.Repositories
                 .FirstOrDefaultAsync(e => e.Id == idExercicio);
         }
 
+        public async Task<int> ContarExercicios()
+        {
+            return await _bancoContext.Exercicios.CountAsync();
+        }
+
         public async Task<Exercicio> CriarExercicio(Exercicio exercicio)
         {
             await _bancoContext.Exercicios.AddAsync(exercicio);

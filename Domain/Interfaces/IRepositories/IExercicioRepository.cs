@@ -14,5 +14,6 @@ namespace Domain.Interfaces.IRepositories
         Task<Exercicio> EditarExercicio(Exercicio exercicio);
         Task<bool> ExcluirExercicio(Exercicio exercicio);
         Task<List<Exercicio>> BuscarExercicios(int numeroPagina, int totalItens);
+        Task<int> ContarExercicios();
     }
 }

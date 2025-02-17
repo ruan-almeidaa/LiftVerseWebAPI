@@ -35,7 +35,7 @@ namespace Domain.Services
                 Itens = exerciciosDetalhados,
                 TotalItensParaExibir = totalRegistros,
                 NumeroPaginaAtual = numeroPagina,
-                TotalPaginasParaExibir = totalRegistros / totalItens
+                TotalPaginasParaExibir = (int)Math.Ceiling((double)totalRegistros / totalItens)
             };
 
         }

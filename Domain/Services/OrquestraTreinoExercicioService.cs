@@ -24,15 +24,13 @@ namespace Domain.Services
     {
         private readonly IMapper _mapper;
         private readonly ITreinoService _treinoService;
-        private readonly IExercicioFeitoService _exercicioFeitoService;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
         private readonly ISerieService _serieService;
-        public OrquestraTreinoExercicioService(IMapper mapper, ITreinoService treinoService, IExercicioFeitoService exercicioFeitoService, IVariacaoExercicioService variacaoExercicioService, ISerieService serieService)
+        public OrquestraTreinoExercicioService(IMapper mapper, ITreinoService treinoService, IVariacaoExercicioService variacaoExercicioService, ISerieService serieService)
         {
             _mapper = mapper;
             _treinoService = treinoService;
-            _exercicioFeitoService = exercicioFeitoService;
             _variacaoExercicioService = variacaoExercicioService;
             _serieService = serieService;
         }

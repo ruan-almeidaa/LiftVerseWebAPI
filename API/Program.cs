@@ -64,7 +64,6 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ICredenciaisUsuarioService, CredenciaisUsuarioService>();
 builder.Services.AddScoped<IVariaveisService, VariaveisService>();
 builder.Services.AddScoped<ITreinoService, TreinoService>();
-builder.Services.AddScoped<IExercicioFeitoService, ExercicioFeitoService>();
 builder.Services.AddScoped<IExercicioService, ExercicioService>();
 builder.Services.AddScoped<IVariacaoExercicioService, VariacaoExercicioService>();
 builder.Services.AddScoped<IGrupoMuscularService,  GrupoMuscularService>();
@@ -77,7 +76,6 @@ builder.Services.AddScoped<IOrquestracaoExercicioVariacaoGrupo, OrquestracaoExer
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();
 builder.Services.AddScoped<ITreinoRepository, TreinoRepository>();
-builder.Services.AddScoped<IExercicioFeitoRepository,  ExercicioFeitoRepository>();
 builder.Services.AddScoped<IExercicioRepository, ExercicioRepository>();
 builder.Services.AddScoped<IVariacaoExercicioRepository, VariacaoExercicioRepository>();
 builder.Services.AddScoped<IGrupoMuscularRepository, GrupoMuscularRepository>();

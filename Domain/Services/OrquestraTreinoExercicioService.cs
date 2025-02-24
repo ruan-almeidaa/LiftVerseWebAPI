@@ -115,7 +115,6 @@ namespace Domain.Services
         private async Task<TreinoDetalhadoDto> ConverteTreinoParaTreinoDetalhado(Treino treino)
         {
             TreinoDetalhadoDto treinoAhSerRetornado = _mapper.Map<TreinoDetalhadoDto>(treino);
-            List<ExercicioFeitoDetalhadoDto> listaExerciciosFeitos = new List<ExercicioFeitoDetalhadoDto>();
             List<SerieDetalhadoDto> listaSeries = new List<SerieDetalhadoDto>();
 
             foreach(Serie serie in treino.Series)

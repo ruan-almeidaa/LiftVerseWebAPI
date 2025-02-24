@@ -1,4 +1,5 @@
 ﻿using Entities.Dtos.Input.ExercicioFeito;
+using Entities.Dtos.Input.Serie;
 using Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,6 @@ namespace Entities.Dtos.Input.Treino
         public int UsuarioId { get; set; }
         public required string Titulo { get; set; }
         public required DateOnly Data { get; set; }
-        public List<ExercicioFeitoCriarDto>? ExerciciosFeitos { get; set; }
+        public List<SerieCriarDto>? Series { get; set; }
     }
 }

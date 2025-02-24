@@ -22,10 +22,6 @@ namespace Helpers.Automapper
         {
             CreateMap<UsuarioEhCredenciaisDto, Usuario>();
 
-            CreateMap<ExercicioFeitoCriarDto, ExercicioFeito>();
-            CreateMap<ExercicioFeitoEditarDto, ExercicioFeito>();
-            CreateMap<ExercicioFeito, ExercicioFeitoDetalhadoDto>();
-
             CreateMap<TreinoCriarDto, Treino>();
             CreateMap<TreinoEditarDto, Treino>();
 

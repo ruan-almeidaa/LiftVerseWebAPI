@@ -17,7 +17,6 @@ namespace Infra.Database
         public DbSet<Exercicio> Exercicios { get; set; }
         public DbSet<VariacaoExercicio> VariacoesExercicios { get; set; }
         public DbSet<Treino> Treinos { get; set; }
-        public DbSet<ExercicioFeito> ExerciciosFeitos { get; set; }
         public DbSet<Serie> Series { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,17 +47,6 @@ namespace Infra.Database
                 .WithOne() // Cada ExercicioFeito pertence a um Treino
                 .HasForeignKey(ef => ef.TreinoId) // Defina a chave estrangeira no ExercicioFeito
                 .OnDelete(DeleteBehavior.Cascade); // Definindo o comportamento de exclusão (pode ser ajustado conforme necessário)
-
-            // Definir a chave primária de ExercicioFeito
-            modelBuilder.Entity<ExercicioFeito>()
-                .HasKey(ef => ef.Id);
-
-            // Configurar relacionamento 1-N entre VariacaoExercicio e ExercicioFeito
-            modelBuilder.Entity<ExercicioFeito>()
-                .HasOne(ef => ef.VariacaoExercicio) // Um ExercicioFeito tem uma VariacaoExercicio
-                .WithMany() // Uma VariacaoExercicio tem vários ExercicioFeito
-                .HasForeignKey(ef => ef.VariacaoExercicioId) // Chave estrangeira em ExercicioFeito
-                .OnDelete(DeleteBehavior.Restrict); // Comportamento de exclusão
 
             // Relacionamento entre Treino e Serie: Um Treino pode ter várias series
             modelBuilder.Entity<Treino>()

@@ -12,8 +12,6 @@ namespace Entities.Entities
         public int UsuarioId { get; set; }
         public required string Titulo { get; set; }
         public required DateOnly Data { get; set; }
-        public List<ExercicioFeito>? ExerciciosFeitos { get; set;}
-
         public List<Serie>? Series { get; set; }
     }
 }

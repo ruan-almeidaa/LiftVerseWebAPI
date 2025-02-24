@@ -38,9 +38,9 @@ namespace Domain.Services
             return await _treinoRepository.CriarTreino(treino);
         }
 
-        public async Task<Treino> EditarTreino(TreinoEditarDto treinoDto)
+        public async Task<Treino> EditarTreino(Treino treino)
         {
-            return await _treinoRepository.EditarTreino(_mapper.Map<Treino>(treinoDto));
+            return await _treinoRepository.EditarTreino(treino);
         }
 
         public async Task<bool> ExcluirTreino(Treino treino)

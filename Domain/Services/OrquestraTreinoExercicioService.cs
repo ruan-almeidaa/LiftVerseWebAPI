@@ -2,6 +2,7 @@
 using Domain.Interfaces.IServices;
 using Entities.Dtos.Input.CredenciaisUsuario;
 using Entities.Dtos.Input.ExercicioFeito;
+using Entities.Dtos.Input.Serie;
 using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
 using Entities.Dtos.Output.ExercicioFeito;
@@ -25,12 +26,14 @@ namespace Domain.Services
         private readonly IExercicioFeitoService _exercicioFeitoService;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
-        public OrquestraTreinoExercicioService(IMapper mapper, ITreinoService treinoService, IExercicioFeitoService exercicioFeitoService, IVariacaoExercicioService variacaoExercicioService)
+        private readonly ISerieService _serieService;
+        public OrquestraTreinoExercicioService(IMapper mapper, ITreinoService treinoService, IExercicioFeitoService exercicioFeitoService, IVariacaoExercicioService variacaoExercicioService, ISerieService serieService)
         {
             _mapper = mapper;
             _treinoService = treinoService;
             _exercicioFeitoService = exercicioFeitoService;
             _variacaoExercicioService = variacaoExercicioService;
+            _serieService = serieService;
         }
 
         public async Task<ResponseModel<TreinoDetalhadoDto>> BuscarTreinoPorId(int usuarioId, int treinoId)
@@ -69,22 +72,27 @@ namespace Domain.Services
 
         public async Task<ResponseModel<TreinoDetalhadoDto>> EditarTreino(TreinoEditarDto treinoEditadoDto)
         {
-            //Primeiro exclui todos os exercicios do treino que está sendo editado
-            await _exercicioFeitoService.ExcluirExerciciosTreino(treinoEditadoDto.Id);
 
-            //Recria os exercícios que foram editados
-            List<ExercicioFeito> exerciciosEditados = new List<ExercicioFeito>();
-            foreach(ExercicioFeitoEditarDto exercicioEditado in treinoEditadoDto.ExerciciosFeitos)
+            //Cria lista com as series que serão recriadas
+            List<Serie> seriesRecriadas = new List<Serie>();
+            foreach(SerieEditarDto seriesEditadasDto in treinoEditadoDto.Series)
             {
-                ExercicioFeito exercicioAhCriar = _mapper.Map<ExercicioFeito>(exercicioEditado);
-                exercicioAhCriar.Id = 0;
-                exerciciosEditados.Add(exercicioAhCriar);
+                Serie serieAhCriar = _mapper.Map<Serie>(seriesEditadasDto);
+                serieAhCriar.Id = 0;
+                seriesRecriadas.Add(_mapper.Map<Serie>(seriesEditadasDto));
             }
-            exerciciosEditados = await _exercicioFeitoService.CriarListaExerciciosFeitos(exerciciosEditados);
 
-            treinoEditadoDto.ExerciciosFeitos = null;//Limpa os exercícios para que não precise editar
-            Treino treinoEditado = await _treinoService.EditarTreino(treinoEditadoDto);
-            treinoEditado.ExerciciosFeitos = exerciciosEditados; //Atualiza o treino com os exercícios que foram recriados
+            //Converte o Dto de Treino, para entidade
+            Treino treinoEditado = _mapper.Map<Treino>(treinoEditadoDto);
+
+            //Ajusta as series do treino, com a nova lista
+            treinoEditado.Series = seriesRecriadas;
+
+            //Exclui do banco de dados, todas as series do treino
+            await _serieService.ExcluirSeriesTreino(treinoEditadoDto.Id);
+
+            //Edita o Treino, recriando as series
+            treinoEditado = await _treinoService.EditarTreino(treinoEditado);
             
             TreinoDetalhadoDto treinoDetalhadoDto = await ConverteTreinoParaTreinoDetalhado(treinoEditado);
             return treinoEditado != null

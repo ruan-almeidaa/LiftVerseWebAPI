@@ -6,6 +6,7 @@ using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
 using Entities.Dtos.Output.Exercicio;
 using Entities.Dtos.Output.ExercicioFeito;
+using Entities.Dtos.Output.Serie;
 using Entities.Dtos.Output.Treino;
 using Entities.Dtos.Output.VariacaoExercicio;
 using Entities.Entities;
@@ -38,6 +39,7 @@ namespace Helpers.Automapper
 
             CreateMap<SerieEditarDto, Serie>();
             CreateMap<SerieCriarDto, Serie>();
+            CreateMap<Serie, SerieDetalhadoDto>();
         }
     }
 }

@@ -6,6 +6,7 @@ using Entities.Dtos.Input.Serie;
 using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
 using Entities.Dtos.Output.ExercicioFeito;
+using Entities.Dtos.Output.Serie;
 using Entities.Dtos.Output.Treino;
 using Entities.Entities;
 using Shared.Criptografia;
@@ -117,15 +118,15 @@ namespace Domain.Services
         {
             TreinoDetalhadoDto treinoAhSerRetornado = _mapper.Map<TreinoDetalhadoDto>(treino);
             List<ExercicioFeitoDetalhadoDto> listaExerciciosFeitos = new List<ExercicioFeitoDetalhadoDto>();
+            List<SerieDetalhadoDto> listaSeries = new List<SerieDetalhadoDto>();
 
-            foreach (ExercicioFeito exercicioFeito in treino.ExerciciosFeitos)
+            foreach(Serie serie in treino.Series)
             {
-                ExercicioFeitoDetalhadoDto exercicioFeitoDetalhadoDto = await _exercicioFeitoService.ConverteExercicioFeitoParaDetalhado(exercicioFeito);
-
-                listaExerciciosFeitos.Add(exercicioFeitoDetalhadoDto);
+                SerieDetalhadoDto serieDetalhadoDto = await _serieService.ConverteParaSerieDetalhado(serie);
+                listaSeries.Add(serieDetalhadoDto);
             }
 
-            treinoAhSerRetornado.Exercicios = listaExerciciosFeitos;
+            treinoAhSerRetornado.Series = listaSeries;
 
             return treinoAhSerRetornado;
 

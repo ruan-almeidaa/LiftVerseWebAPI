@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IServices
 {
-    public interface IOrquestracaoExercicioVariacaoGrupo
+    public interface IOrquestradorExercicioVariacaoGrupo
     {
         Task<ResponseModel<ExercicioDetalhadoDto>> BuscarPorId(int id);
         Task<ResponseModel<ExercicioDetalhadoDto>> CriarExercicio(ExercicioCriarDto exercicioCriarDto);

@@ -15,6 +15,7 @@ using Shared.VariaveisAmbiente;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Domain.Services.Orquestradores;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,9 +70,9 @@ builder.Services.AddScoped<IVariacaoExercicioService, VariacaoExercicioService>(
 builder.Services.AddScoped<IGrupoMuscularService,  GrupoMuscularService>();
 builder.Services.AddScoped<ISerieService, SerieService>();
 
-builder.Services.AddScoped<IOrquestraTreinoExercicioService, OrquestraTreinoExercicioService>();
-builder.Services.AddScoped<IOrquestraUsuarioCredenciaisService, OrquestraUsuarioCredenciaisService>();
-builder.Services.AddScoped<IOrquestracaoExercicioVariacaoGrupo, OrquestracaoExercicioVariacaoGrupoService>();
+builder.Services.AddScoped<IOrquestradorTreinoExercicio, OrquestradorTreinoExercicio>();
+builder.Services.AddScoped<IOrquestradorUsuarioCredenciais, OrquestradorUsuarioCredenciais>();
+builder.Services.AddScoped<IOrquestradorExercicioVariacaoGrupo, OrquestradorExercicioVariacaoGrupo>();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICredenciaisUsuarioRepository,  CredenciaisUsuarioRepository>();

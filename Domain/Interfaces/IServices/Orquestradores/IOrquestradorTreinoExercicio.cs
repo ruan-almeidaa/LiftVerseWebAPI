@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IServices
 {
-    public interface IOrquestraTreinoExercicioService
+    public interface IOrquestradorTreinoExercicio
     {
         Task<ResponseModel<TreinoDetalhadoDto>> CriarTreino(TreinoCriarDto treinoDto);
         Task<ResponseModel<TreinoDetalhadoDto>> EditarTreino(TreinoEditarDto treinoEditadoDto);

@@ -16,16 +16,16 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services
+namespace Domain.Services.Orquestradores
 {
-    public class OrquestraTreinoExercicioService : IOrquestraTreinoExercicioService
+    public class OrquestradorTreinoExercicio : IOrquestradorTreinoExercicio
     {
         private readonly IMapper _mapper;
         private readonly ITreinoService _treinoService;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
         private readonly ISerieService _serieService;
-        public OrquestraTreinoExercicioService(IMapper mapper, ITreinoService treinoService, IVariacaoExercicioService variacaoExercicioService, ISerieService serieService)
+        public OrquestradorTreinoExercicio(IMapper mapper, ITreinoService treinoService, IVariacaoExercicioService variacaoExercicioService, ISerieService serieService)
         {
             _mapper = mapper;
             _treinoService = treinoService;
@@ -36,12 +36,12 @@ namespace Domain.Services
         public async Task<ResponseModel<TreinoDetalhadoDto>> BuscarTreinoPorId(int usuarioId, int treinoId)
         {
             Treino treinoBuscado = await _treinoService.BuscarTreinoPorId(treinoId);
-            if(treinoBuscado == null) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O treino não foi encontrado!", HttpStatusCode.NotFound);
-            if(treinoBuscado.UsuarioId !=  usuarioId) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O usuário não pode acessar esse treino!", HttpStatusCode.Unauthorized);
+            if (treinoBuscado == null) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O treino não foi encontrado!", HttpStatusCode.NotFound);
+            if (treinoBuscado.UsuarioId != usuarioId) return ResponseService.CriarResponse<TreinoDetalhadoDto>(null, "O usuário não pode acessar esse treino!", HttpStatusCode.Unauthorized);
 
 
             TreinoDetalhadoDto treinoDetalhadoDto = await ConverteTreinoParaTreinoDetalhado(treinoBuscado);
-            return ResponseService.CriarResponse<TreinoDetalhadoDto>(treinoDetalhadoDto,"Treino encontrado com sucesso!", HttpStatusCode.OK);
+            return ResponseService.CriarResponse(treinoDetalhadoDto, "Treino encontrado com sucesso!", HttpStatusCode.OK);
         }
 
         public async Task<ResponseModel<List<TreinoDetalhadoDto>>> BuscarTreinosUsuario(int usuarioId)
@@ -49,7 +49,7 @@ namespace Domain.Services
             List<Treino> treinos = await _treinoService.BuscarTreinosUsuario(usuarioId);
 
             List<TreinoDetalhadoDto> treinosDetalhados = new List<TreinoDetalhadoDto>();
-            foreach(Treino treino in treinos)
+            foreach (Treino treino in treinos)
             {
                 treinosDetalhados.Add(await ConverteTreinoParaTreinoDetalhado(treino));
             }
@@ -72,7 +72,7 @@ namespace Domain.Services
 
             //Cria lista com as series que serão recriadas
             List<Serie> seriesRecriadas = new List<Serie>();
-            foreach(SerieEditarDto seriesEditadasDto in treinoEditadoDto.Series)
+            foreach (SerieEditarDto seriesEditadasDto in treinoEditadoDto.Series)
             {
                 Serie serieAhCriar = _mapper.Map<Serie>(seriesEditadasDto);
                 serieAhCriar.Id = 0;
@@ -90,7 +90,7 @@ namespace Domain.Services
 
             //Edita o Treino, recriando as series
             treinoEditado = await _treinoService.EditarTreino(treinoEditado);
-            
+
             TreinoDetalhadoDto treinoDetalhadoDto = await ConverteTreinoParaTreinoDetalhado(treinoEditado);
             return treinoEditado != null
                 ? ResponseService.CriarResponse(treinoDetalhadoDto, "treino editado com sucesso!", HttpStatusCode.OK)
@@ -115,7 +115,7 @@ namespace Domain.Services
             TreinoDetalhadoDto treinoAhSerRetornado = _mapper.Map<TreinoDetalhadoDto>(treino);
             List<SerieDetalhadoDto> listaSeries = new List<SerieDetalhadoDto>();
 
-            foreach(Serie serie in treino.Series)
+            foreach (Serie serie in treino.Series)
             {
                 SerieDetalhadoDto serieDetalhadoDto = await _serieService.ConverteParaSerieDetalhado(serie);
                 listaSeries.Add(serieDetalhadoDto);

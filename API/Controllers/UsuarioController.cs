@@ -17,8 +17,8 @@ namespace API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
-        private readonly IOrquestraUsuarioCredenciaisService _orquestracaoUsuarioCredenciaisService;
-        public UsuarioController(IUsuarioService usuarioService, IOrquestraUsuarioCredenciaisService orquestracaoUsuarioCredenciaisService)
+        private readonly IOrquestradorUsuarioCredenciais _orquestracaoUsuarioCredenciaisService;
+        public UsuarioController(IUsuarioService usuarioService, IOrquestradorUsuarioCredenciais orquestracaoUsuarioCredenciaisService)
         {
             _usuarioService = usuarioService;
             _orquestracaoUsuarioCredenciaisService = orquestracaoUsuarioCredenciaisService;

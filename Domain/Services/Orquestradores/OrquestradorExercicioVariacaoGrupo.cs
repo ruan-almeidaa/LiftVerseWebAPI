@@ -12,15 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services
+namespace Domain.Services.Orquestradores
 {
-    public class OrquestracaoExercicioVariacaoGrupoService : IOrquestracaoExercicioVariacaoGrupo
+    public class OrquestradorExercicioVariacaoGrupo : IOrquestradorExercicioVariacaoGrupo
     {
         private readonly IMapper _mapper;
         private readonly IExercicioService _exercicioService;
         private readonly IVariacaoExercicioService _variacaoExercicioService;
         private readonly IGrupoMuscularService _grupoMuscularService;
-        public OrquestracaoExercicioVariacaoGrupoService(IExercicioService exercicioService, IVariacaoExercicioService variacaoExercicioService, IMapper mapper, IGrupoMuscularService grupoMuscularService)
+        public OrquestradorExercicioVariacaoGrupo(IExercicioService exercicioService, IVariacaoExercicioService variacaoExercicioService, IMapper mapper, IGrupoMuscularService grupoMuscularService)
         {
             _exercicioService = exercicioService;
             _variacaoExercicioService = variacaoExercicioService;
@@ -32,7 +32,7 @@ namespace Domain.Services
         {
             PaginacaoModel<ExercicioDetalhadoDto> paginacaoExercicios = await _exercicioService.BuscarExercicios(numeroPagina, qtdRegistrosPorPagina);
 
-            return ResponseService.CriarResponse<PaginacaoModel<ExercicioDetalhadoDto>>(paginacaoExercicios, "Ok", System.Net.HttpStatusCode.OK);
+            return ResponseService.CriarResponse(paginacaoExercicios, "Ok", System.Net.HttpStatusCode.OK);
         }
 
         public async Task<ResponseModel<ExercicioDetalhadoDto>> BuscarPorId(int id)
@@ -40,7 +40,7 @@ namespace Domain.Services
             Exercicio exercicio = await _exercicioService.BuscarPorid(id);
             ExercicioDetalhadoDto exercicioDetalhadoDto = _exercicioService.ConverteEmDetalhado(exercicio);
 
-            return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+            return ResponseService.CriarResponse(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
         }
 
         public async Task<ResponseModel<ExercicioDetalhadoDto>> CriarExercicio(ExercicioCriarDto exercicioCriarDto)
@@ -49,7 +49,7 @@ namespace Domain.Services
 
             ExercicioDetalhadoDto exercicioDetalhadoDto = _mapper.Map<ExercicioDetalhadoDto>(exercicioCriado);
             exercicioDetalhadoDto.GrupoMuscular = await _grupoMuscularService.BuscarPorId(exercicioCriado.GrupoMuscularId);
-            return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+            return ResponseService.CriarResponse(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
 
         }
 
@@ -59,7 +59,7 @@ namespace Domain.Services
 
             ExercicioDetalhadoDto exercicioDetalhadoDto = _mapper.Map<ExercicioDetalhadoDto>(exercicioEditado);
             exercicioDetalhadoDto.GrupoMuscular = await _grupoMuscularService.BuscarPorId(exercicioEditado.GrupoMuscularId);
-            return ResponseService.CriarResponse<ExercicioDetalhadoDto>(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
+            return ResponseService.CriarResponse(exercicioDetalhadoDto, "Ok", System.Net.HttpStatusCode.OK);
 
         }
 
@@ -70,8 +70,8 @@ namespace Domain.Services
             bool exercicioFoiExcluido = await _exercicioService.ExcluirExercicio(exercicioParaExcluir);
 
             return exercicioFoiExcluido
-                ? ResponseService.CriarResponse<ExercicioDetalhadoDto>(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Exercício excluido com sucesso!", System.Net.HttpStatusCode.OK)
-                : ResponseService.CriarResponse<ExercicioDetalhadoDto>(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Houve um erro ao excluir o exercício!", System.Net.HttpStatusCode.BadRequest);
+                ? ResponseService.CriarResponse(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Exercício excluido com sucesso!", System.Net.HttpStatusCode.OK)
+                : ResponseService.CriarResponse(_mapper.Map<ExercicioDetalhadoDto>(exercicioParaExcluir), "Houve um erro ao excluir o exercício!", System.Net.HttpStatusCode.BadRequest);
 
         }
     }

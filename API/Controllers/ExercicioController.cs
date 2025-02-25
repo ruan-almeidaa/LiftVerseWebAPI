@@ -16,9 +16,9 @@ namespace API.Controllers
     [ApiController]
     public class ExercicioController : ControllerBase
     {
-        private readonly IOrquestracaoExercicioVariacaoGrupo _orquestracaoExercicioVariacaoGrupo;
+        private readonly IOrquestradorExercicioVariacaoGrupo _orquestracaoExercicioVariacaoGrupo;
 
-        public ExercicioController(IOrquestracaoExercicioVariacaoGrupo orquestracaoExercicioVariacaoGrupo)
+        public ExercicioController(IOrquestradorExercicioVariacaoGrupo orquestracaoExercicioVariacaoGrupo)
         {
             _orquestracaoExercicioVariacaoGrupo = orquestracaoExercicioVariacaoGrupo;
         }

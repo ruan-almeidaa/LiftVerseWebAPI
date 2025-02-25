@@ -14,8 +14,8 @@ namespace API.Controllers
     [Authorize]
     public class TreinoController : ControllerBase
     {
-        private readonly IOrquestraTreinoExercicioService _orquestracaoService;
-        public TreinoController(IOrquestraTreinoExercicioService orquestracaoService) 
+        private readonly IOrquestradorTreinoExercicio _orquestracaoService;
+        public TreinoController(IOrquestradorTreinoExercicio orquestracaoService) 
         { 
             _orquestracaoService = orquestracaoService; 
         }
@@ -25,7 +25,7 @@ namespace API.Controllers
             try
             {
                 if(int.Parse(User.FindFirst("id")?.Value) != treinoDto.UsuarioId) return StatusCode(500, ResponseService.CriarResponse<TreinoCriarDto>(treinoDto, "Acesso negado", System.Net.HttpStatusCode.Forbidden));
-                return await _orquestracaoService.CriarTreinoEhExerciciosFeitos(treinoDto);
+                return await _orquestracaoService.CriarTreino(treinoDto);
             }
             catch (Exception ex)
             {

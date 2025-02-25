@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IServices
 {
-    public interface IOrquestraUsuarioCredenciaisService
+    public interface IOrquestradorUsuarioCredenciais
     {
         Task<ResponseModel<Usuario>> CriaUsuarioEhCredenciais(UsuarioEhCredenciaisDto usuarioEhCredenciais);
         Task<ResponseModel<UsuarioAutenticadoDto>> AutenticarUsuario(CredenciaisUsuarioDto credenciaisUsuarioDto);

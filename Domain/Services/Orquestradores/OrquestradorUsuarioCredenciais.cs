@@ -13,15 +13,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services
+namespace Domain.Services.Orquestradores
 {
-    public class OrquestraUsuarioCredenciaisService : IOrquestraUsuarioCredenciaisService
+    public class OrquestradorUsuarioCredenciais : IOrquestradorUsuarioCredenciais
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
         private readonly ICredenciaisUsuarioService _credenciaisUsuarioService;
 
-        public OrquestraUsuarioCredenciaisService(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService)
+        public OrquestradorUsuarioCredenciais(IUsuarioService usuarioService, IMapper mapper, ICredenciaisUsuarioService credenciaisUsuarioService)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
@@ -33,7 +33,7 @@ namespace Domain.Services
             try
             {
                 UsuarioAutenticadoDto usuarioAutenticadoDto = await _credenciaisUsuarioService.AutenticarUsuario(credenciaisUsuarioDto);
-                return ResponseService.CriarResponse<UsuarioAutenticadoDto>(usuarioAutenticadoDto, "Usuário autenticado!", HttpStatusCode.OK);
+                return ResponseService.CriarResponse(usuarioAutenticadoDto, "Usuário autenticado!", HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace Domain.Services
             CredenciaisUsuario credenciaisUsuario = new()
             {
                 Email = usuarioEhCredenciais.Email,
-                Senha = Criptografia.GerarHash(usuarioEhCredenciais.Senha),
+                Senha = usuarioEhCredenciais.Senha.GerarHash(),
                 UsuarioId = usuarioCriado.Id,
                 Usuario = usuarioCriado
             };

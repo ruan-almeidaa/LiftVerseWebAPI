@@ -71,13 +71,14 @@ namespace Domain.Services.Orquestradores
         {
 
             //Cria lista com as series que serão recriadas
-            List<Serie> seriesRecriadas = new List<Serie>();
-            foreach (SerieEditarDto seriesEditadasDto in treinoEditadoDto.Series)
-            {
-                Serie serieAhCriar = _mapper.Map<Serie>(seriesEditadasDto);
-                serieAhCriar.Id = 0;
-                seriesRecriadas.Add(_mapper.Map<Serie>(seriesEditadasDto));
-            }
+            List<Serie> seriesRecriadas = treinoEditadoDto.Series
+                .Select(dto =>
+                {
+                    Serie serie = _mapper.Map<Serie>(dto);
+                    serie.Id = 0;
+                    return serie;
+                })
+                .ToList();
 
             //Converte o Dto de Treino, para entidade
             Treino treinoEditado = _mapper.Map<Treino>(treinoEditadoDto);

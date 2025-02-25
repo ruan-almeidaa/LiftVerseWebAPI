@@ -14,7 +14,7 @@ namespace Domain.Interfaces.IServices
 {
     public interface IOrquestraTreinoExercicioService
     {
-        Task<ResponseModel<TreinoDetalhadoDto>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto);
+        Task<ResponseModel<TreinoDetalhadoDto>> CriarTreino(TreinoCriarDto treinoDto);
         Task<ResponseModel<TreinoDetalhadoDto>> EditarTreino(TreinoEditarDto treinoEditadoDto);
         Task<ResponseModel<List<TreinoDetalhadoDto>>> BuscarTreinosUsuario(int usuarioId);
         Task<ResponseModel<TreinoDetalhadoDto>> BuscarTreinoPorId(int usuarioId, int treinoId);

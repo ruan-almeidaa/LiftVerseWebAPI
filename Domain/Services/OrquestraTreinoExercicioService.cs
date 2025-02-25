@@ -59,7 +59,7 @@ namespace Domain.Services
                 : ResponseService.CriarResponse(treinosDetalhados, "Não foram encontrados treinos do usuário", HttpStatusCode.NotFound);
         }
 
-        public async Task<ResponseModel<TreinoDetalhadoDto>> CriarTreinoEhExerciciosFeitos(TreinoCriarDto treinoDto)
+        public async Task<ResponseModel<TreinoDetalhadoDto>> CriarTreino(TreinoCriarDto treinoDto)
         {
             Treino treinoCriado = await _treinoService.CriarTreino(_mapper.Map<Treino>(treinoDto));
 

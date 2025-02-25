@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Entities.Dtos.Input.Exercicio;
-using Entities.Dtos.Input.ExercicioFeito;
 using Entities.Dtos.Input.Serie;
 using Entities.Dtos.Input.Treino;
 using Entities.Dtos.Input.Usuario;
 using Entities.Dtos.Output.Exercicio;
-using Entities.Dtos.Output.ExercicioFeito;
 using Entities.Dtos.Output.Serie;
 using Entities.Dtos.Output.Treino;
 using Entities.Dtos.Output.VariacaoExercicio;

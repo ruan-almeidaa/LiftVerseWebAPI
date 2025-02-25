@@ -1,5 +1,4 @@
-﻿using Entities.Dtos.Output.ExercicioFeito;
-using Entities.Dtos.Output.Serie;
+﻿using Entities.Dtos.Output.Serie;
 using System;
 using System.Collections.Generic;
 using System.Linq;

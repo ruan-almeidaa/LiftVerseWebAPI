@@ -21,7 +21,7 @@ namespace Infra.Repositories
         public async Task<Treino> BuscarTreinoPorId(int treinoId)
         {
             return await _bancoContext.Treinos
-                .Include(t => t.ExerciciosFeitos)
+                .Include(t => t.Series)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(t => t.Id == treinoId);
         }
@@ -30,7 +30,7 @@ namespace Infra.Repositories
         {
             return await _bancoContext.Treinos
                 .Where(t => t.UsuarioId == usuarioId)
-                .Include(t => t.ExerciciosFeitos)
+                .Include(t => t.Series)
                 .AsNoTracking()
                 .ToListAsync();
         }

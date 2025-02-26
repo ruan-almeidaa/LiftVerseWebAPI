@@ -38,7 +38,7 @@ namespace Helpers.Automapper
             CreateMap<SerieEditarDto, Serie>();
             CreateMap<SerieCriarDto, Serie>();
             CreateMap<Serie, SerieDetalhadoDto>();
-            CreateMap<SerieCriarComTreinoDto, Serie>();
+            CreateMap<SerieFilhaTreinoDto, Serie>();
         }
     }
 }

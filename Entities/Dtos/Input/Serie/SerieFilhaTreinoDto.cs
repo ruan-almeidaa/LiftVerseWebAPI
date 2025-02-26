@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dtos.Input.Serie
 {
-    public class SerieCriarComTreinoDto
+    public class SerieFilhaTreinoDto
     {
         public int ExercicioId { get; set; }
         public int? VariacaoExercicioId { get; set; }

@@ -24,6 +24,13 @@ namespace Infra.Repositories
             return serie;
         }
 
+        public async Task<bool> ExcluirSerie(Serie serie)
+        {
+            _bancoContext.Series.Remove(serie);
+            int qtdRegistrosExcluidos = await _bancoContext.SaveChangesAsync();
+            return qtdRegistrosExcluidos > 0;
+        }
+
         public async Task<bool> ExcluirSeriesTreino(int treinoId)
         {
             _bancoContext.Series.RemoveRange(_bancoContext.Series.Where(s => s.TreinoId == treinoId));

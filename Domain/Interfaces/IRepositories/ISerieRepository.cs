@@ -12,5 +12,7 @@ namespace Domain.Interfaces.IRepositories
         Task<bool> ExcluirSeriesTreino(int treinoId);
         Task<Serie> CriarSerie(Serie serie);
         Task<bool> ExcluirSerie(Serie serie);
+        Task<Serie> EditarSerie(Serie serie);
+        Task<Serie> BuscarSeriePorId(int idSerie);
     }
 }

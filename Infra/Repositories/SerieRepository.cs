@@ -1,4 +1,5 @@
 ﻿using Domain.Interfaces.IRepositories;
+using Entities.Entities;
 using Infra.Database;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,14 @@ namespace Infra.Repositories
         {
             _bancoContext = bancoContext;
         }
+
+        public async Task<Serie> CriarSerie(Serie serie)
+        {
+            await _bancoContext.Series.AddAsync(serie);
+            await _bancoContext.SaveChangesAsync();
+            return serie;
+        }
+
         public async Task<bool> ExcluirSeriesTreino(int treinoId)
         {
             _bancoContext.Series.RemoveRange(_bancoContext.Series.Where(s => s.TreinoId == treinoId));
